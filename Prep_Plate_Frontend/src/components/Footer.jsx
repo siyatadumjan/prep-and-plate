@@ -10,8 +10,7 @@ const Footer = () => (
         <Link to="/recipes" className="hover:text-green-600">Recipes</Link>
         <Link to="/about" className="hover:text-green-600">About Us</Link>
         <Link to="/contact" className="hover:text-green-600">Contact</Link>
-        <Link to="/terms" className="hover:text-green-600">Terms</Link>
-        <Link to="/privacy" className="hover:text-green-600">Privacy</Link>
+        <Link to="/help" className="hover:text-green-600">Help</Link>
       </div>
       <div className="flex gap-4 text-xl text-gray-500">
         <a href="#" aria-label="Facebook"><FaFacebook /></a>

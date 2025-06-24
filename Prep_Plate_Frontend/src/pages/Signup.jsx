@@ -7,7 +7,6 @@ const Signup = () => {
   const [lastName, setLastName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [agree, setAgree] = useState(false);
   const [loading, setLoading] = useState(false);
   const [message, setMessage] = useState("");
   const [error, setError] = useState("");
@@ -18,11 +17,7 @@ const Signup = () => {
     setLoading(true);
     setMessage("");
     setError("");
-    if (!agree) {
-      setError("You must agree to the Terms of Service and Privacy Policy.");
-      setLoading(false);
-      return;
-    }
+    
     setTimeout(() => {
       if (email.includes("fail")) {
         setError("Email already in use or invalid (simulated error)");
@@ -53,10 +48,6 @@ const Signup = () => {
           </div>
           <input type="email" placeholder="Email address" className="w-full border rounded px-4 py-2" value={email} onChange={e => setEmail(e.target.value)} required />
           <input type="password" placeholder="Password" className="w-full border rounded px-4 py-2" value={password} onChange={e => setPassword(e.target.value)} required />
-          <div className="flex items-center gap-2">
-            <input type="checkbox" id="terms" className="accent-green-600" checked={agree} onChange={e => setAgree(e.target.checked)} />
-            <label htmlFor="terms" className="text-sm text-gray-600">I agree to the <a href="#" className="text-green-600 underline">Terms of Service</a> and <a href="#" className="text-green-600 underline">Privacy Policy</a></label>
-          </div>
           <button type="submit" className="w-full bg-green-600 text-white py-2 rounded font-semibold hover:bg-green-700 disabled:opacity-60" disabled={loading}>{loading ? "Creating..." : "Create account"}</button>
         </form>
         <div className="flex items-center my-4">

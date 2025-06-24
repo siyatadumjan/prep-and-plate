@@ -6,7 +6,7 @@ const featuredRecipes = [
     id: 1,
     title: "Lemon Herb Roasted Chicken",
     desc: "Perfectly roasted chicken with a bright lemon and herb flavor profile. Zero waste.",
-    img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80",
+    img: "https://images.pexels.com/photos/5718025/pexels-photo-5718025.jpeg?auto=compress&cs=tinysrgb&w=400",
     time: "1 hr 30 min",
     servings: 4,
   },
@@ -14,17 +14,17 @@ const featuredRecipes = [
     id: 2,
     title: "Vegetarian Pasta Primavera",
     desc: "Fresh spring vegetables tossed with pasta in a light sauce. Perfectly portioned.",
-    img: "https://images.unsplash.com/photo-1523987355523-c7b5b0723c6a?auto=format&fit=crop&w=400&q=80",
+    img: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=400",
     time: "25 min",
     servings: 2,
   },
   {
     id: 3,
-    title: "Teriyaki Salmon Bowl",
-    desc: "Glazed salmon with perfectly measured rice and vegetables. A balanced meal.",
-    img: "https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80",
-    time: "35 min",
-    servings: 2,
+    title: "Steamed Chicken Momo",
+    desc: "Delicious steamed dumplings filled with seasoned minced chicken.",
+    img: "https://images.pexels.com/photos/5409010/pexels-photo-5409010.jpeg?auto=compress&cs=tinysrgb&w=400",
+    time: "40 min",
+    servings: 8,
   },
 ];
 
@@ -72,7 +72,7 @@ const Home = () => (
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
         {featuredRecipes.map(recipe => (
-          <div key={recipe.id} className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+          <Link to={`/recipes/${recipe.id}`} key={recipe.id} className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden block">
             <img src={recipe.img} alt={recipe.title} className="w-full h-48 object-cover" />
             <div className="p-4">
               <h3 className="font-semibold text-lg mb-1">{recipe.title}</h3>
@@ -82,7 +82,7 @@ const Home = () => (
                 <span>🍽 {recipe.servings} servings</span>
               </div>
             </div>
-          </div>
+          </Link>
         ))}
       </div>
     </section>
