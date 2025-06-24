@@ -41,9 +41,9 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow-sm px-6 py-3 flex items-center justify-between">
-      <div className="flex items-center gap-3 md:gap-8">
-        <Link to="/" className="flex items-center gap-2">
-          <img src={logo} alt="Prep & Plate Logo" className="h-14 w-auto rounded" />
+      <div className="flex items-center gap-8">
+        <Link to="/" className="flex items-center mr-6">
+          <img src={logo} alt="Prep & Plate Logo" className="h-20 min-w-[80px] w-auto object-contain" />
         </Link>
         <Link to="/" className="text-gray-700 hover:text-green-600">Home</Link>
         <Link to="/recipes" className="text-gray-700 hover:text-green-600">Recipes</Link>
