@@ -1,27 +1,62 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 const Checkout = () => {
   const [payment, setPayment] = useState("Esewa");
+  const [loading, setLoading] = useState(false);
+  const [address, setAddress] = useState("");
+  const { clearCart } = useContext(CartContext);
+  const navigate = useNavigate();
+
+  const handlePayment = () => {
+    setLoading(true);
+    // Simulate payment processing
+    setTimeout(() => {
+      setLoading(false);
+      clearCart();
+      navigate("/order-confirmation");
+    }, 1500);
+  };
+
   return (
     <div className="max-w-2xl mx-auto px-4 py-10">
-      <h1 className="text-2xl font-bold mb-8">Payment</h1>
+      <h1 className="text-2xl font-bold mb-8">Checkout</h1>
       <div className="bg-white rounded-lg shadow p-6 mb-6">
-        <h2 className="font-semibold mb-4">Payment</h2>
-        <div className="flex items-center gap-4 mb-4">
-          <label className="flex items-center gap-2">
-            <input type="radio" checked={payment === "Esewa"} onChange={() => setPayment("Esewa")} className="accent-green-600" />
-            Esewa
+        <h2 className="font-semibold mb-4">Payment Method</h2>
+        <div className="flex flex-col gap-3 mb-6">
+          <label className="flex items-center gap-3 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="payment" value="Esewa" checked={payment === "Esewa"} onChange={() => setPayment("Esewa")} className="accent-green-600" />
+            <span>Esewa</span>
+          </label>
+          <label className="flex items-center gap-3 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="payment" value="Khalti" checked={payment === "Khalti"} onChange={() => setPayment("Khalti")} className="accent-green-600" />
+            <span>Khalti</span>
           </label>
         </div>
-        <button className="bg-black text-white px-6 py-2 rounded font-semibold mb-4">Pay</button>
-        <div className="text-gray-600 text-sm mb-2">Billing address</div>
-        <div className="flex items-center gap-2 text-gray-500 text-sm">
-          <input type="checkbox" checked readOnly className="accent-green-600" />
-          Same as shipping address
+        
+        <div className="border-t pt-4">
+            <h3 className="font-semibold mb-2">Address</h3>
+            <input
+              type="text"
+              className="w-full border rounded px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+              placeholder="Enter your address"
+              value={address}
+              onChange={e => setAddress(e.target.value)}
+              required
+            />
         </div>
+
+        <button 
+            onClick={handlePayment}
+            disabled={loading || !address.trim()}
+            className="w-full mt-6 bg-green-600 text-white py-3 rounded font-semibold hover:bg-green-700 transition disabled:opacity-60"
+        >
+          {loading ? 'Processing...' : `Pay with ${payment}`}
+        </button>
       </div>
     </div>
   );
 };
 
-export default Checkout; 
+export default Checkout;
