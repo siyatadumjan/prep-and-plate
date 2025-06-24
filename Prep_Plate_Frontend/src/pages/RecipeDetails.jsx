@@ -1,5 +1,6 @@
-import React, { useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useState, useContext } from "react";
+import { useParams, useNavigate } from "react-router-dom";
+import { CartContext } from "../context/CartContext";
 
 const recipeData = {
   1: {
@@ -8,6 +9,7 @@ const recipeData = {
     desc: "This perfectly roasted chicken has a bright lemon and herb flavor profile. The recipe uses precise measurements to ensure zero waste while creating a delicious meal.",
     img: "https://images.pexels.com/photos/5718025/pexels-photo-5718025.jpeg?auto=compress&cs=tinysrgb&w=800",
     servings: 2,
+    pricePerServing: 850,
     time: "1 hr 30 min",
     ingredients: [
       { name: "Whole chicken", qty: 1.5, unit: "kg" },
@@ -36,8 +38,24 @@ const recipeData = {
 
 const RecipeDetails = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
+  const { addToCart } = useContext(CartContext);
+  
   const recipe = recipeData[id] || recipeData[1]; // Fallback to recipe 1 if ID not found
   const [servings, setServings] = useState(recipe.servings);
+
+  const handleOrder = () => {
+    const itemToAdd = {
+      id: recipe.id,
+      title: recipe.title,
+      img: recipe.img,
+      servings: servings,
+      price: recipe.pricePerServing * servings,
+      pricePerServing: recipe.pricePerServing
+    };
+    addToCart(itemToAdd);
+    navigate('/cart');
+  };
 
   // Adjust ingredient quantities based on servings
   const adjustedIngredients = recipe.ingredients.map(ing => ({
@@ -63,7 +81,7 @@ const RecipeDetails = () => {
             <button onClick={() => setServings(s => s+1)} className="px-2 py-1 bg-gray-200 rounded">+</button>
             <span className="text-xs text-gray-400 ml-2">Ingredient quantities will adjust automatically to reduce waste</span>
           </div>
-          <button className="bg-green-600 text-white px-6 py-2 rounded font-semibold hover:bg-green-700 mb-6">Order Ingredients</button>
+          <button onClick={handleOrder} className="bg-green-600 text-white px-6 py-2 rounded font-semibold hover:bg-green-700 mb-6">Order Ingredients</button>
           <div className="bg-gray-50 rounded-lg p-4 mb-4">
             <h2 className="font-semibold mb-2">Ingredients</h2>
             <ul className="space-y-1">
