@@ -1,38 +1,42 @@
 import React, { useState } from "react";
 import { useParams } from "react-router-dom";
 
-const recipe = {
-  id: 1,
-  title: "Lemon Herb Roasted Chicken",
-  desc: "This perfectly roasted chicken has a bright lemon and herb flavor profile. The recipe uses precise measurements to ensure zero waste while creating a delicious meal.",
-  img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=800&q=80",
-  servings: 2,
-  time: "1 hr 30 min",
-  ingredients: [
-    { name: "Whole chicken", qty: 1.5, unit: "kg" },
-    { name: "Lemons", qty: 2, unit: "" },
-    { name: "Fresh rosemary", qty: 3, unit: "sprigs" },
-    { name: "Fresh thyme", qty: 4, unit: "sprigs" },
-    { name: "Garlic cloves", qty: 6, unit: "" },
-    { name: "Olive oil", qty: 2, unit: "tbsp" },
-    { name: "Salt", qty: 1, unit: "tsp" },
-    { name: "Black pepper", qty: 0.5, unit: "tsp" },
-  ],
-  nutrition: { calories: 350, protein: 42, carbs: 2, fat: 18 },
-  instructions: [
-    "Preheat your oven to 375°F (190°C).",
-    "Remove any giblets from the chicken cavity and pat the chicken dry with paper towels.",
-    "Cut one lemon into quarters and place inside the chicken cavity along with half of the rosemary, thyme, and garlic.",
-    "In a small bowl, mix the olive oil, salt, pepper, and the juice from the second lemon.",
-    "Rub the olive oil mixture all over the chicken, including under the skin where possible.",
-    "Place the chicken in a roasting pan and scatter the remaining herbs and garlic around it.",
-    "Roast for approximately 1 hour and 15 minutes, or until the internal temperature reaches 165°F (74°C) at the thickest part of the thigh.",
-    "Let the chicken rest for 10-15 minutes before carving and serving.",
-  ],
+const recipeData = {
+  1: {
+    id: 1,
+    title: "Lemon Herb Roasted Chicken",
+    desc: "This perfectly roasted chicken has a bright lemon and herb flavor profile. The recipe uses precise measurements to ensure zero waste while creating a delicious meal.",
+    img: "https://images.pexels.com/photos/5718025/pexels-photo-5718025.jpeg?auto=compress&cs=tinysrgb&w=800",
+    servings: 2,
+    time: "1 hr 30 min",
+    ingredients: [
+      { name: "Whole chicken", qty: 1.5, unit: "kg" },
+      { name: "Lemons", qty: 2, unit: "" },
+      { name: "Fresh rosemary", qty: 3, unit: "sprigs" },
+      { name: "Fresh thyme", qty: 4, unit: "sprigs" },
+      { name: "Garlic cloves", qty: 6, unit: "" },
+      { name: "Olive oil", qty: 2, unit: "tbsp" },
+      { name: "Salt", qty: 1, unit: "tsp" },
+      { name: "Black pepper", qty: 0.5, unit: "tsp" },
+    ],
+    nutrition: { calories: 350, protein: 42, carbs: 2, fat: 18 },
+    instructions: [
+      "Preheat your oven to 375°F (190°C).",
+      "Remove any giblets from the chicken cavity and pat the chicken dry with paper towels.",
+      "Cut one lemon into quarters and place inside the chicken cavity along with half of the rosemary, thyme, and garlic.",
+      "In a small bowl, mix the olive oil, salt, pepper, and the juice from the second lemon.",
+      "Rub the olive oil mixture all over the chicken, including under the skin where possible.",
+      "Place the chicken in a roasting pan and scatter the remaining herbs and garlic around it.",
+      "Roast for approximately 1 hour and 15 minutes, or until the internal temperature reaches 165°F (74°C) at the thickest part of the thigh.",
+      "Let the chicken rest for 10-15 minutes before carving and serving.",
+    ],
+  }
+  // ... you can add other recipes here by ID
 };
 
 const RecipeDetails = () => {
   const { id } = useParams();
+  const recipe = recipeData[id] || recipeData[1]; // Fallback to recipe 1 if ID not found
   const [servings, setServings] = useState(recipe.servings);
 
   // Adjust ingredient quantities based on servings

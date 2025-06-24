@@ -133,7 +133,6 @@ const Recipes = () => {
             onChange={e => setSearch(e.target.value)}
             className="border rounded px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-200"
           />
-          <button className="border px-3 py-1 rounded text-sm text-gray-600 hover:bg-green-50">Filter</button>
         </div>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 min-h-[800px]">
