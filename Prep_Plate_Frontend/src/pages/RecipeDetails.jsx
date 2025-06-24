@@ -68,7 +68,7 @@ const recipeData = {
     id: 3,
     title: "Steamed Chicken Momo",
     desc: "A beloved Nepali dumpling filled with flavorful minced chicken and steamed to perfection. Served with a spicy dipping sauce, it's a favorite comfort food.",
-    img: "https://images.pexels.com/photos/1640777/pexels-photo-1640777.jpeg?auto=compress&cs=tinysrgb&w=800",
+    img: "https://images.pexels.com/photos/5409010/pexels-photo-5409010.jpeg?auto=compress&cs=tinysrgb&w=800",
     servings: 2,
     pricePerServing: 500,
     time: "50 min",
