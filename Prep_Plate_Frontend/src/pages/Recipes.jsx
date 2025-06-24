@@ -33,7 +33,7 @@ const allRecipes = [
     id: 4,
     title: "Mushroom Risotto",
     desc: "Creamy risotto with perfectly measured arborio rice and fresh mushrooms.",
-    img: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=400&q=80",
+    img: "https://images.unsplash.com/photo-1595908129744-8da7a8d9835a?auto=format&fit=crop&w=400&q=80",
     time: "45 min",
     servings: 3,
     tag: "Vegetarian",
@@ -42,7 +42,7 @@ const allRecipes = [
     id: 5,
     title: "Beef Stir Fry",
     desc: "Quick and easy beef stir fry with precise portions of vegetables and sauce.",
-    img: "https://images.unsplash.com/photo-1464306076886-debca5e8a6b0?auto=format&fit=crop&w=400&q=80",
+    img: "https://images.unsplash.com/photo-1565299585323-21d1d138321b?auto=format&fit=crop&w=400&q=80",
     time: "30 min",
     servings: 4,
     tag: "",
@@ -51,11 +51,65 @@ const allRecipes = [
     id: 6,
     title: "Mediterranean Chickpea Salad",
     desc: "Refreshing salad with chickpeas, cucumber, tomatoes, and a simple dressing.",
-    img: "https://images.unsplash.com/photo-1502741338009-cac2772e18bc?auto=format&fit=crop&w=400&q=80",
+    img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=400&q=80",
     time: "15 min",
     servings: 2,
     tag: "Vegan",
   },
+  {
+    id: 7,
+    title: "Spicy Tuna Rolls",
+    desc: "Classic sushi rolls with spicy tuna and avocado, perfectly portioned.",
+    img: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=400&q=80",
+    time: "50 min",
+    servings: 2,
+    tag: "Popular",
+  },
+  {
+    id: 8,
+    title: "Classic Margherita Pizza",
+    desc: "Simple and delicious pizza with fresh mozzarella, tomatoes, and basil.",
+    img: "https://images.unsplash.com/photo-1598021680133-eb3a737d7524?auto=format&fit=crop&w=400&q=80",
+    time: "30 min",
+    servings: 3,
+    tag: "Vegetarian",
+  },
+  {
+    id: 9,
+    title: "Beef Tacos",
+    desc: "Flavorful ground beef tacos with all the fixings.",
+    img: "https://images.unsplash.com/photo-1565299712547-4f6932a7a3a5?auto=format&fit=crop&w=400&q=80",
+    time: "25 min",
+    servings: 4,
+    tag: "",
+  },
+   {
+    id: 10,
+    title: "Chocolate Lava Cakes",
+    desc: "Decadent individual chocolate cakes with a gooey, molten center.",
+    img: "https://images.unsplash.com/photo-1586985289936-a3a03a484cc3?auto=format&fit=crop&w=400&q=80",
+    time: "22 min",
+    servings: 2,
+    tag: "Dessert",
+  },
+  {
+    id: 11,
+    title: "Chicken Caesar Salad",
+    desc: "A classic salad with grilled chicken, romaine lettuce, croutons, and Caesar dressing.",
+    img: "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=400&q=80",
+    time: "20 min",
+    servings: 2,
+    tag: "",
+  },
+  {
+    id: 12,
+    title: "Butternut Squash Soup",
+    desc: "A creamy and comforting soup made from roasted butternut squash.",
+    img: "https://images.unsplash.com/photo-1476718406333-315fb3b44b7a?auto=format&fit=crop&w=400&q=80",
+    time: "1 hr",
+    servings: 4,
+    tag: "Vegan",
+  }
 ];
 
 const Recipes = () => {
@@ -82,7 +136,7 @@ const Recipes = () => {
           <button className="border px-3 py-1 rounded text-sm text-gray-600 hover:bg-green-50">Filter</button>
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 min-h-[800px]">
         {paginated.map(recipe => (
           <Link to={`/recipes/${recipe.id}`} key={recipe.id} className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden">
             <img src={recipe.img} alt={recipe.title} className="w-full h-48 object-cover" />
@@ -101,16 +155,30 @@ const Recipes = () => {
         ))}
       </div>
       {/* Pagination */}
-      <div className="flex justify-center gap-2">
+      <div className="flex justify-center items-center gap-2">
+         <button
+          onClick={() => setPage(p => Math.max(1, p - 1))}
+          disabled={page === 1}
+          className="px-4 py-2 rounded bg-gray-200 text-gray-700 disabled:opacity-50 hover:bg-gray-300"
+        >
+          Previous
+        </button>
         {Array.from({ length: totalPages }, (_, i) => (
           <button
             key={i}
             onClick={() => setPage(i+1)}
-            className={`px-3 py-1 rounded ${page === i+1 ? 'bg-green-500 text-white' : 'bg-gray-100 text-gray-700'}`}
+            className={`px-4 py-2 rounded-md font-semibold ${page === i+1 ? 'bg-green-500 text-white shadow' : 'bg-gray-100 text-gray-700 hover:bg-gray-200'}`}
           >
             {i+1}
           </button>
         ))}
+        <button
+          onClick={() => setPage(p => Math.min(totalPages, p + 1))}
+          disabled={page === totalPages}
+          className="px-4 py-2 rounded bg-gray-200 text-gray-700 disabled:opacity-50 hover:bg-gray-300"
+        >
+          Next
+        </button>
       </div>
     </div>
   );
