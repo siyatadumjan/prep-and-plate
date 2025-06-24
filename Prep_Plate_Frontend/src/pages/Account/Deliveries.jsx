@@ -1,25 +1,33 @@
 import React from "react";
 
+const deliveries = [
+  { id: "2001", date: "2025-06-28", address: "Kathmandu, Nepal", status: "On the way" },
+  { id: "2002", date: "2025-07-01", address: "Bhaktapur, Nepal", status: "Scheduled" },
+];
+
 const Deliveries = () => (
-  <div className="max-w-4xl mx-auto px-4 py-10 flex gap-8">
-    <aside className="w-64 bg-white rounded-lg shadow p-6 flex flex-col items-center">
-      <div className="w-24 h-24 bg-gray-200 rounded-full mb-4" />
-      <div className="font-semibold text-lg mb-1">Siyata Dumjan</div>
-      <div className="text-gray-500 text-sm mb-2">siyata@example.com</div>
-      <nav className="w-full mt-6">
-        <ul className="space-y-2">
-          <li className="rounded px-3 py-2 hover:bg-gray-50 cursor-pointer">Profile</li>
-          <li className="rounded px-3 py-2 hover:bg-gray-50 cursor-pointer">Order History</li>
-          <li className="bg-green-50 rounded px-3 py-2 font-medium text-green-600">Upcoming Deliveries</li>
-          <li className="rounded px-3 py-2 hover:bg-gray-50 cursor-pointer">Payment Methods</li>
-          <li className="rounded px-3 py-2 hover:bg-gray-50 cursor-pointer">Delivery Address</li>
-        </ul>
-      </nav>
-    </aside>
-    <section className="flex-1 bg-white rounded-lg shadow p-8">
-      <h2 className="text-xl font-semibold mb-6">Upcoming Deliveries</h2>
-      <div className="text-gray-500">No upcoming deliveries at the moment.</div>
-    </section>
+  <div className="p-6">
+    <h2 className="text-xl font-bold mb-4">Upcoming Deliveries</h2>
+    <div className="bg-white rounded shadow p-4">
+      <table className="w-full text-left">
+        <thead>
+          <tr className="border-b">
+            <th className="py-2">Delivery Date</th>
+            <th className="py-2">Address</th>
+            <th className="py-2">Status</th>
+          </tr>
+        </thead>
+        <tbody>
+          {deliveries.map(delivery => (
+            <tr key={delivery.id} className="border-b last:border-b-0">
+              <td className="py-2">{delivery.date}</td>
+              <td className="py-2">{delivery.address}</td>
+              <td className="py-2">{delivery.status}</td>
+            </tr>
+          ))}
+        </tbody>
+      </table>
+    </div>
   </div>
 );
 

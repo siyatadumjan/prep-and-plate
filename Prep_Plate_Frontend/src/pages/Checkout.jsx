@@ -6,6 +6,7 @@ const Checkout = () => {
   const [payment, setPayment] = useState("Esewa");
   const [loading, setLoading] = useState(false);
   const [address, setAddress] = useState("");
+  const [phone, setPhone] = useState("");
   const { clearCart } = useContext(CartContext);
   const navigate = useNavigate();
 
@@ -39,17 +40,25 @@ const Checkout = () => {
             <h3 className="font-semibold mb-2">Address</h3>
             <input
               type="text"
-              className="w-full border rounded px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+              className="w-full border rounded px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 mb-4"
               placeholder="Enter your address"
               value={address}
               onChange={e => setAddress(e.target.value)}
+              required
+            />
+            <input
+              type="tel"
+              className="w-full border rounded px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
+              placeholder="Enter your phone number"
+              value={phone}
+              onChange={e => setPhone(e.target.value)}
               required
             />
         </div>
 
         <button 
             onClick={handlePayment}
-            disabled={loading || !address.trim()}
+            disabled={loading || !address.trim() || !phone.trim()}
             className="w-full mt-6 bg-green-600 text-white py-3 rounded font-semibold hover:bg-green-700 transition disabled:opacity-60"
         >
           {loading ? 'Processing...' : `Pay with ${payment}`}
