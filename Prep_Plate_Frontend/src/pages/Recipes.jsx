@@ -5,7 +5,8 @@ import beefStirFryImg from "../assets/beef-stir-fry.jpg";
 import palakPaneerImg from "../assets/palak paneer.webp";
 import classicMargheritaPizzaImg from "../assets/classic margherita pizza.jpeg";
 import paniPuriImg from "../assets/pani-puri.jpg";
-import beefTacosImg from "../assets/beef-tacos.jpg";
+import beefTacosImg from "../assets/beef-tacos.webp";
+import chocolateLavaCakeImg from "../assets/chocolate-lava-cake.webp";
 
 const allRecipes = [
   {
@@ -92,8 +93,8 @@ const allRecipes = [
    {
     id: 10,
     title: "Chocolate Lava Cakes",
-    desc: "Decadent individual chocolate cakes with a gooey, molten center.",
-    img: "https://images.unsplash.com/photo-1586985289936-a3a03a484cc3?auto=format&fit=crop&w=400&q=80",
+    desc: "Decadent individual chocolate cakes with a gooey, molten chocolate center.",
+    img: chocolateLavaCakeImg,
     time: "22 min",
     servings: 2,
     tag: "Dessert",

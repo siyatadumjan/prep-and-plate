@@ -6,7 +6,8 @@ import beefStirFryImg from "../assets/beef-stir-fry.jpg";
 import palakPaneerImg from "../assets/palak paneer.webp";
 import classicMargheritaPizzaImg from "../assets/classic margherita pizza.jpeg";
 import paniPuriImg from "../assets/pani-puri.jpg";
-import beefTacosImg from "../assets/beef-tacos.jpg";
+import beefTacosImg from "../assets/beef-tacos.webp";
+import chocolateLavaCakeImg from "../assets/chocolate-lava-cake.webp";
 
 const recipeData = {
   1: {
@@ -279,6 +280,35 @@ const recipeData = {
       "Warm taco shells as per package instructions.",
       "Fill each shell with beef mixture, then top with lettuce, cheese, and sour cream.",
       "Serve immediately and enjoy!",
+    ],
+  },
+  10: {
+    id: 10,
+    title: "Chocolate Lava Cakes",
+    desc: "Rich and decadent individual chocolate cakes with a gooey, molten chocolate center. Perfect for special occasions or whenever you crave a chocolate treat!",
+    img: chocolateLavaCakeImg,
+    servings: 2,
+    pricePerServing: 250,
+    time: "22 min",
+    ingredients: [
+      { name: "Dark chocolate (chopped)", qty: 100, unit: "g" },
+      { name: "Unsalted butter", qty: 50, unit: "g" },
+      { name: "Eggs", qty: 2, unit: "" },
+      { name: "Powdered sugar", qty: 0.5, unit: "cup" },
+      { name: "All-purpose flour", qty: 0.25, unit: "cup" },
+      { name: "Vanilla extract", qty: 0.5, unit: "tsp" },
+      { name: "Salt", qty: 1, unit: "pinch" },
+      { name: "Butter (for greasing)", qty: 1, unit: "tbsp" },
+      { name: "Cocoa powder (for dusting)", qty: 1, unit: "tbsp" },
+    ],
+    nutrition: { calories: 370, protein: 6, carbs: 38, fat: 22 },
+    instructions: [
+      "Preheat oven to 220°C (425°F). Grease two ramekins with butter and dust with cocoa powder.",
+      "Melt chocolate and butter together until smooth. Let cool slightly.",
+      "In a bowl, whisk eggs and powdered sugar until thick and pale.",
+      "Fold in the melted chocolate mixture, then add flour, vanilla, and salt. Mix until just combined.",
+      "Divide batter between ramekins. Bake for 10-12 minutes until the edges are set but the center is still soft.",
+      "Let cool for 1 minute, then invert onto plates. Serve immediately, optionally with ice cream or berries.",
     ],
   },
   11: {
