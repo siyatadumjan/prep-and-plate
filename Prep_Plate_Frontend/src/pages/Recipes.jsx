@@ -1,5 +1,10 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import selrotiImg from "../assets/sel-roti.jpeg";
+import beefStirFryImg from "../assets/beef-stir-fry.jpg";
+import palakPaneerImg from "../assets/palak paneer.webp";
+import classicMargheritaPizzaImg from "../assets/classic margherita pizza.jpeg";
+import paniPuriImg from "../assets/pani-puri.jpg";
 
 const allRecipes = [
   {
@@ -33,7 +38,7 @@ const allRecipes = [
     id: 4,
     title: "Selroti",
     desc: "Traditional Nepali rice flour ring bread, crispy on the outside and soft inside. Often enjoyed during festivals and special occasions.",
-    img: "https://images.pexels.com/photos/6784142/pexels-photo-6784142.jpeg?auto=compress&cs=tinysrgb&w=400",
+    img: selrotiImg,
     time: "1 hr",
     servings: 4,
     tag: "Traditional",
@@ -42,16 +47,16 @@ const allRecipes = [
     id: 5,
     title: "Beef Stir Fry",
     desc: "Quick and easy beef stir fry with precise portions of vegetables and sauce.",
-    img: "https://images.pexels.com/photos/357756/pexels-photo-357756.jpeg?auto=compress&cs=tinysrgb&w=400",
+    img: beefStirFryImg,
     time: "30 min",
     servings: 4,
     tag: "",
   },
   {
     id: 6,
-    title: "Mediterranean Chickpea Salad",
-    desc: "Refreshing salad with chickpeas, cucumber, tomatoes, and a simple dressing.",
-    img: "https://images.unsplash.com/photo-1555939594-58d7cb561ad1?auto=format&fit=crop&w=400&q=80",
+    title: "Palak Paneer",
+    desc: "Classic Indian dish made with paneer cubes simmered in a creamy spinach gravy.",
+    img: palakPaneerImg,
     time: "15 min",
     servings: 2,
     tag: "Vegan",
@@ -69,7 +74,7 @@ const allRecipes = [
     id: 8,
     title: "Classic Margherita Pizza",
     desc: "Simple and delicious pizza with fresh mozzarella, tomatoes, and basil.",
-    img: "https://images.unsplash.com/photo-1598021680133-eb3a737d7524?auto=format&fit=crop&w=400&q=80",
+    img: classicMargheritaPizzaImg,
     time: "30 min",
     servings: 3,
     tag: "Vegetarian",
@@ -94,9 +99,9 @@ const allRecipes = [
   },
   {
     id: 11,
-    title: "Chicken Caesar Salad",
-    desc: "A classic salad with grilled chicken, romaine lettuce, croutons, and Caesar dressing.",
-    img: "https://images.unsplash.com/photo-1551218808-94e220e084d2?auto=format&fit=crop&w=400&q=80",
+    title: "Panipuri",
+    desc: "A popular Indian street food consisting of crispy puris filled with spicy, tangy water, potatoes, and chickpeas.",
+    img: paniPuriImg,
     time: "20 min",
     servings: 2,
     tag: "",
