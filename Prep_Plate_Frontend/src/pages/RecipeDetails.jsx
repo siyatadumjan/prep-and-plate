@@ -6,6 +6,7 @@ import beefStirFryImg from "../assets/beef-stir-fry.jpg";
 import palakPaneerImg from "../assets/palak paneer.webp";
 import classicMargheritaPizzaImg from "../assets/classic margherita pizza.jpeg";
 import paniPuriImg from "../assets/pani-puri.jpg";
+import beefTacosImg from "../assets/beef tacos.jpg";
 
 const recipeData = {
   1: {
@@ -246,6 +247,38 @@ const recipeData = {
       "Drizzle with olive oil and season with salt and pepper.",
       "Bake for 10-12 minutes until the crust is golden and cheese is bubbly.",
       "Slice and serve hot.",
+    ],
+  },
+  9: {
+    id: 9,
+    title: "Beef Tacos",
+    desc: "Classic Mexican-style beef tacos featuring seasoned ground beef, fresh toppings, and soft or crispy taco shells. Perfect for a quick and delicious meal!",
+    img: beefTacosImg,
+    servings: 4,
+    pricePerServing: 350,
+    time: "25 min",
+    ingredients: [
+      { name: "Ground beef", qty: 400, unit: "g" },
+      { name: "Taco shells (soft or crispy)", qty: 8, unit: "pieces" },
+      { name: "Onion (chopped)", qty: 1, unit: "small" },
+      { name: "Garlic cloves (minced)", qty: 2, unit: "" },
+      { name: "Tomato (chopped)", qty: 1, unit: "medium" },
+      { name: "Taco seasoning", qty: 2, unit: "tbsp" },
+      { name: "Lettuce (shredded)", qty: 1, unit: "cup" },
+      { name: "Cheddar cheese (grated)", qty: 0.5, unit: "cup" },
+      { name: "Sour cream", qty: 0.25, unit: "cup" },
+      { name: "Salt", qty: 0.5, unit: "tsp" },
+      { name: "Black pepper", qty: 0.25, unit: "tsp" },
+      { name: "Oil", qty: 1, unit: "tbsp" },
+    ],
+    nutrition: { calories: 290, protein: 16, carbs: 22, fat: 15 },
+    instructions: [
+      "Heat oil in a skillet over medium heat. Add onion and garlic, sauté until soft.",
+      "Add ground beef and cook until browned. Drain excess fat if needed.",
+      "Stir in tomato, taco seasoning, salt, and pepper. Cook for 5 minutes until well combined.",
+      "Warm taco shells as per package instructions.",
+      "Fill each shell with beef mixture, then top with lettuce, cheese, and sour cream.",
+      "Serve immediately and enjoy!",
     ],
   },
   11: {

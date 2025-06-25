@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useLocation } from "react-router-dom";
 import selrotiImg from "../assets/sel-roti.jpeg";
 import beefStirFryImg from "../assets/beef-stir-fry.jpg";
 import palakPaneerImg from "../assets/palak paneer.webp";
 import classicMargheritaPizzaImg from "../assets/classic margherita pizza.jpeg";
 import paniPuriImg from "../assets/pani-puri.jpg";
+import beefTacosImg from "../assets/beef tacos.jpg";
 
 const allRecipes = [
   {
@@ -83,7 +84,7 @@ const allRecipes = [
     id: 9,
     title: "Beef Tacos",
     desc: "Flavorful ground beef tacos with all the fixings.",
-    img: "https://images.unsplash.com/photo-1565299712547-4f6932a7a3a5?auto=format&fit=crop&w=400&q=80",
+    img: beefTacosImg,
     time: "25 min",
     servings: 4,
     tag: "",
@@ -118,9 +119,26 @@ const allRecipes = [
 ];
 
 const Recipes = () => {
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  // Read page from query param, default to 1
+  const params = new URLSearchParams(location.search);
+  const initialPage = parseInt(params.get("page")) || 1;
+
   const [search, setSearch] = useState("");
-  const [page, setPage] = useState(1);
+  const [page, setPage] = useState(initialPage);
   const recipesPerPage = 6;
+
+  // Update URL when page changes
+  React.useEffect(() => {
+    const params = new URLSearchParams(location.search);
+    if (page !== initialPage) {
+      params.set("page", page);
+      navigate({ search: params.toString() }, { replace: true });
+    }
+    // eslint-disable-next-line
+  }, [page]);
 
   const filtered = allRecipes.filter(r => r.title.toLowerCase().includes(search.toLowerCase()));
   const paginated = filtered.slice((page-1)*recipesPerPage, page*recipesPerPage);
