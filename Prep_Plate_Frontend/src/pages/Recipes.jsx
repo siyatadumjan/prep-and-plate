@@ -5,7 +5,7 @@ import beefStirFryImg from "../assets/beef-stir-fry.jpg";
 import palakPaneerImg from "../assets/palak paneer.webp";
 import classicMargheritaPizzaImg from "../assets/classic margherita pizza.jpeg";
 import paniPuriImg from "../assets/pani-puri.jpg";
-import beefTacosImg from "../assets/beef tacos.jpg";
+import beefTacosImg from "../assets/beef-tacos.jpg";
 
 const allRecipes = [
   {
