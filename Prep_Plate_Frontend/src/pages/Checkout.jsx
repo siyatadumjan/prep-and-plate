@@ -7,6 +7,7 @@ const Checkout = () => {
   const [loading, setLoading] = useState(false);
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
+  const [phoneError, setPhoneError] = useState("");
   const { clearCart } = useContext(CartContext);
   const navigate = useNavigate();
 
@@ -51,14 +52,24 @@ const Checkout = () => {
               className="w-full border rounded px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500"
               placeholder="Enter your phone number"
               value={phone}
-              onChange={e => setPhone(e.target.value)}
+              onChange={e => {
+                const value = e.target.value;
+                setPhone(value);
+                // Validate Nepali phone number: 10 digits, starts with 98, 97, or 96
+                if (!/^9[876]\d{8}$/.test(value)) {
+                  setPhoneError("Enter a valid 10-digit Nepali mobile number (starts with 98, 97, or 96)");
+                } else {
+                  setPhoneError("");
+                }
+              }}
               required
             />
+            {phoneError && <div className="text-red-500 text-sm mt-1">{phoneError}</div>}
         </div>
 
         <button 
             onClick={handlePayment}
-            disabled={loading || !address.trim() || !phone.trim()}
+            disabled={loading || !address.trim() || !phone.trim() || !!phoneError}
             className="w-full mt-6 bg-green-600 text-white py-3 rounded font-semibold hover:bg-green-700 transition disabled:opacity-60"
         >
           {loading ? 'Processing...' : `Pay with ${payment}`}
