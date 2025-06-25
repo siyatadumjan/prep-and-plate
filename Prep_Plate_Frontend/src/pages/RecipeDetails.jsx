@@ -8,6 +8,7 @@ import classicMargheritaPizzaImg from "../assets/classic margherita pizza.jpeg";
 import paniPuriImg from "../assets/pani-puri.jpg";
 import beefTacosImg from "../assets/beef-tacos.webp";
 import chocolateLavaCakeImg from "../assets/chocolate-lava-cake.webp";
+import samosaImg from "../assets/samosa.avif";
 
 const recipeData = {
   1: {
@@ -339,6 +340,41 @@ const recipeData = {
       "Add a little tamarind chutney and green chutney to each puri.",
       "Dip the filled puri into spicy flavored water (pani) or pour some pani inside.",
       "Eat immediately for the best crunch and flavor!",
+    ],
+  },
+  12: {
+    id: 12,
+    title: "Samosa",
+    desc: "Samosa is a classic Indian snack featuring a crispy, golden pastry filled with a spicy mixture of potatoes, peas, and aromatic spices. Perfect as a tea-time treat or party appetizer!",
+    img: samosaImg,
+    servings: 4,
+    pricePerServing: 80,
+    time: "1 hr",
+    ingredients: [
+      { name: "All-purpose flour", qty: 1.5, unit: "cups" },
+      { name: "Oil (for dough)", qty: 2, unit: "tbsp" },
+      { name: "Salt", qty: 0.5, unit: "tsp" },
+      { name: "Water (as needed)", qty: 0.5, unit: "cup" },
+      { name: "Potatoes (boiled, mashed)", qty: 3, unit: "medium" },
+      { name: "Green peas (boiled)", qty: 0.5, unit: "cup" },
+      { name: "Green chili (chopped)", qty: 1, unit: "" },
+      { name: "Ginger (grated)", qty: 1, unit: "tsp" },
+      { name: "Cumin seeds", qty: 0.5, unit: "tsp" },
+      { name: "Coriander powder", qty: 1, unit: "tsp" },
+      { name: "Garam masala", qty: 0.5, unit: "tsp" },
+      { name: "Red chili powder", qty: 0.25, unit: "tsp" },
+      { name: "Lemon juice", qty: 1, unit: "tsp" },
+      { name: "Fresh coriander (chopped)", qty: 2, unit: "tbsp" },
+      { name: "Oil (for frying)", qty: 2, unit: "cups" },
+    ],
+    nutrition: { calories: 150, protein: 3, carbs: 22, fat: 6 },
+    instructions: [
+      "Mix flour, salt, and oil. Add water gradually to form a stiff dough. Cover and rest for 20 minutes.",
+      "Heat 1 tbsp oil in a pan. Add cumin seeds, then ginger and green chili. Sauté briefly.",
+      "Add mashed potatoes, peas, coriander powder, garam masala, red chili powder, salt, and lemon juice. Mix well. Stir in fresh coriander and let filling cool.",
+      "Divide dough into balls, roll each into an oval, cut in half. Form a cone, fill with potato mixture, and seal edges with water.",
+      "Heat oil for deep frying. Fry samosas on medium heat until golden and crisp.",
+      "Serve hot with chutney or sauce.",
     ],
   },
 };

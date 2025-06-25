@@ -7,6 +7,7 @@ import classicMargheritaPizzaImg from "../assets/classic margherita pizza.jpeg";
 import paniPuriImg from "../assets/pani-puri.jpg";
 import beefTacosImg from "../assets/beef-tacos.webp";
 import chocolateLavaCakeImg from "../assets/chocolate-lava-cake.webp";
+import samosaImg from "../assets/samosa.avif";
 
 const allRecipes = [
   {
@@ -110,9 +111,9 @@ const allRecipes = [
   },
   {
     id: 12,
-    title: "Butternut Squash Soup",
-    desc: "A creamy and comforting soup made from roasted butternut squash.",
-    img: "https://images.unsplash.com/photo-1476718406333-315fb3b44b7a?auto=format&fit=crop&w=400&q=80",
+    title: "Samosa",
+    desc: "A popular Indian snack with a crispy pastry filled with spicy potatoes and peas.",
+    img: samosaImg,
     time: "1 hr",
     servings: 4,
     tag: "Vegan",
