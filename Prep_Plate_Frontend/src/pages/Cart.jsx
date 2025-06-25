@@ -14,7 +14,7 @@ const Cart = () => {
     <div className="max-w-5xl mx-auto px-4 py-10">
       <h1 className="text-3xl font-bold mb-8">Your Cart</h1>
       <div className="flex flex-col md:flex-row gap-8">
-        <div className="flex-1">
+        <div className="flex-1 min-w-0">
           {cart.length === 0 ? (
             <div className="text-center py-10 bg-gray-50 rounded-lg">
               <p className="text-gray-500 mb-4">Your cart is empty.</p>
@@ -24,8 +24,8 @@ const Cart = () => {
             </div>
           ) : (
             cart.map(item => (
-              <div key={item.id} className="flex items-center gap-4 mb-6 bg-white rounded-lg shadow p-4">
-                <img src={item.img} alt={item.title} className="w-20 h-20 object-cover rounded" />
+              <div key={item.id} className="flex flex-col sm:flex-row items-center gap-4 mb-6 bg-white rounded-lg shadow p-4">
+                <img src={item.img} alt={item.title} className="w-24 h-24 object-cover rounded" />
                 <div className="flex-1">
                   <div className="font-semibold">{item.title}</div>
                   <div className="text-gray-500 text-sm">Price per serving: Rs {item.pricePerServing}</div>
@@ -41,7 +41,7 @@ const Cart = () => {
             ))
           )}
         </div>
-        <div className="w-full md:w-80">
+        <div className="w-full md:w-80 mt-8 md:mt-0">
           <div className="bg-white rounded-lg shadow p-6 mb-6">
             <h2 className="font-semibold mb-4">Order Summary</h2>
             <div className="flex justify-between mb-2"><span>Subtotal</span><span>Rs {subtotal.toFixed(2)}</span></div>

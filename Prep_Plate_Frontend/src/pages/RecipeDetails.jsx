@@ -407,24 +407,24 @@ const RecipeDetails = () => {
   }));
 
   return (
-    <div className="max-w-6xl mx-auto px-4 py-10">
+    <div className="max-w-6xl mx-auto px-2 sm:px-4 py-8 sm:py-10">
       <div className="flex flex-col md:flex-row gap-8">
-        <img src={recipe.img} alt={recipe.title} className="rounded-xl shadow-lg w-full md:w-1/2 object-cover" />
+        <img src={recipe.img} alt={recipe.title} className="rounded-xl shadow-lg w-full md:w-1/2 object-cover max-h-72 sm:max-h-96 md:max-h-[28rem]" />
         <div className="flex-1">
-          <h1 className="text-3xl font-bold mb-2">{recipe.title}</h1>
-          <p className="text-gray-600 mb-4">{recipe.desc}</p>
-          <div className="flex items-center gap-4 mb-4">
+          <h1 className="text-2xl sm:text-3xl font-bold mb-2">{recipe.title}</h1>
+          <p className="text-gray-600 mb-4 text-base sm:text-lg">{recipe.desc}</p>
+          <div className="flex items-center gap-4 mb-4 text-sm sm:text-base">
             <span className="text-gray-500">⏱ {recipe.time}</span>
             <span className="text-gray-500">🍽 {servings} servings</span>
           </div>
-          <div className="flex items-center gap-2 mb-6">
+          <div className="flex items-center gap-2 mb-6 flex-wrap">
             <span className="font-medium">Adjust servings:</span>
             <button onClick={() => setServings(s => Math.max(1, s-1))} className="px-2 py-1 bg-gray-200 rounded">-</button>
             <span className="px-3">{servings}</span>
             <button onClick={() => setServings(s => s+1)} className="px-2 py-1 bg-gray-200 rounded">+</button>
             <span className="text-xs text-gray-400 ml-2">Ingredient quantities will adjust automatically to reduce waste</span>
           </div>
-          <button onClick={handleOrder} className="bg-green-600 text-white px-6 py-2 rounded font-semibold hover:bg-green-700 mb-6">Order Ingredients</button>
+          <button onClick={handleOrder} className="bg-green-600 text-white px-6 py-2 rounded font-semibold hover:bg-green-700 mb-6 w-full sm:w-auto">Order Ingredients</button>
           <div className="bg-gray-50 rounded-lg p-4 mb-4">
             <h2 className="font-semibold mb-2">Ingredients</h2>
             <ul className="space-y-1">

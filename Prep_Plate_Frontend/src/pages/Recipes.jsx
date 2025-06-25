@@ -160,17 +160,17 @@ const Recipes = () => {
           />
         </div>
       </div>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8 min-h-[800px]">
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8 min-h-[600px]">
         {paginated.map(recipe => (
-          <Link to={`/recipes/${recipe.id}`} key={recipe.id} className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden">
-            <img src={recipe.img} alt={recipe.title} className="w-full h-48 object-cover" />
-            <div className="p-4">
+          <Link to={`/recipes/${recipe.id}`} key={recipe.id} className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col h-full">
+            <img src={recipe.img} alt={recipe.title} className="w-full h-56 sm:h-64 md:h-72 object-cover" />
+            <div className="p-4 flex flex-col flex-1">
               <div className="flex justify-between items-center mb-1">
                 <h3 className="font-semibold text-lg">{recipe.title}</h3>
                 {recipe.tag && <span className="bg-green-100 text-green-700 text-xs px-2 py-1 rounded">{recipe.tag}</span>}
               </div>
-              <p className="text-gray-500 text-sm mb-2">{recipe.desc}</p>
-              <div className="flex items-center text-xs text-gray-400 gap-4">
+              <p className="text-gray-500 text-sm mb-2 flex-1">{recipe.desc}</p>
+              <div className="flex items-center text-xs text-gray-400 gap-4 mt-auto">
                 <span>⏱ {recipe.time}</span>
                 <span>🍽 {recipe.servings} servings</span>
               </div>
