@@ -86,7 +86,6 @@ const Home = () => {
       <section className="py-12 px-4 max-w-6xl mx-auto">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-semibold">Featured Recipes</h2>
-          <Link to="/recipes" className="text-green-600 hover:underline text-sm">View all recipes →</Link>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
           {featuredRecipes.map(recipe => (
