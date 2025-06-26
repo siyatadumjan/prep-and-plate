@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import selrotiImg from "../assets/sel-roti.jpeg";
 import beefStirFryImg from "../assets/beef-stir-fry.jpg";
@@ -120,9 +120,24 @@ const allRecipes = [
   }
 ];
 
+// Copy getUser from Navbar
+const getUser = () => {
+  const stored = localStorage.getItem("prep_plate_user");
+  if (stored) return JSON.parse(stored);
+  return null;
+};
+
 const Recipes = () => {
   const navigate = useNavigate();
   const location = useLocation();
+  const [showModal, setShowModal] = useState(false);
+  const [user, setUser] = useState(getUser());
+
+  useEffect(() => {
+    const syncUser = () => setUser(getUser());
+    window.addEventListener("storage", syncUser);
+    return () => window.removeEventListener("storage", syncUser);
+  }, []);
 
   // Read page from query param, default to 1
   const params = new URLSearchParams(location.search);
@@ -162,8 +177,10 @@ const Recipes = () => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8 min-h-[600px]">
         {paginated.map(recipe => (
-          <Link to={`/recipes/${recipe.id}`} key={recipe.id} className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col h-full">
-            <img src={recipe.img} alt={recipe.title} className="w-full h-56 sm:h-64 md:h-72 object-cover" />
+          <div key={recipe.id} className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col h-full relative group">
+            <div className="relative">
+              <img src={recipe.img} alt={recipe.title} className="w-full h-56 sm:h-64 md:h-72 object-cover" />
+            </div>
             <div className="p-4 flex flex-col flex-1">
               <div className="flex justify-between items-center mb-1">
                 <h3 className="font-semibold text-lg">{recipe.title}</h3>
@@ -175,7 +192,20 @@ const Recipes = () => {
                 <span>🍽 {recipe.servings} servings</span>
               </div>
             </div>
-          </Link>
+            <button
+              className="absolute inset-0 w-full h-full z-10 bg-transparent"
+              style={{ cursor: !user ? 'not-allowed' : 'pointer' }}
+              onClick={e => {
+                if (!user) {
+                  setShowModal(true);
+                  e.preventDefault();
+                } else {
+                  navigate(`/recipes/${recipe.id}`);
+                }
+              }}
+              aria-label={user ? `View details for ${recipe.title}` : 'Login required'}
+            />
+          </div>
         ))}
       </div>
       {/* Pagination */}
@@ -204,6 +234,20 @@ const Recipes = () => {
           Next
         </button>
       </div>
+      {/* Modal for login/signup prompt */}
+      {showModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-8 max-w-sm w-full text-center">
+            <h2 className="text-xl font-bold mb-2">Authentication Required</h2>
+            <p className="mb-4">You need to sign up or login first to view recipes.</p>
+            <div className="flex gap-4 justify-center">
+              <button onClick={() => { setShowModal(false); navigate('/login'); }} className="bg-green-600 text-white px-4 py-2 rounded font-semibold hover:bg-green-700">Login</button>
+              <button onClick={() => { setShowModal(false); navigate('/signup'); }} className="bg-gray-200 text-gray-700 px-4 py-2 rounded font-semibold hover:bg-gray-300">Sign Up</button>
+            </div>
+            <button onClick={() => setShowModal(false)} className="mt-4 text-sm text-gray-400 hover:underline">Cancel</button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
