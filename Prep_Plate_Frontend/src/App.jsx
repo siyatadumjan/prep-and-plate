@@ -19,6 +19,7 @@ import Address from "./pages/Account/Address";
 import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import Help from "./pages/Help";
+import Dashboard from "./pages/Dashboard";
 
 function App() {
   return (
@@ -44,6 +45,7 @@ function App() {
               <Route path="/about" element={<AboutUs />} />
               <Route path="/contact" element={<ContactUs />} />
               <Route path="/help" element={<Help />} />
+              <Route path="/dashboard" element={<Dashboard />} />
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </main>

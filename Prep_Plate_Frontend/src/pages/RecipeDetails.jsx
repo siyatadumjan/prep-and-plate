@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useState, useContext } from "react";
 import { useParams, useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
 import selrotiImg from "../assets/sel-roti.jpeg";
@@ -379,31 +379,11 @@ const recipeData = {
   },
 };
 
-// Copy getUser from Navbar
-const getUser = () => {
-  const stored = localStorage.getItem("prep_plate_user");
-  if (stored) return JSON.parse(stored);
-  return null;
-};
-
 const RecipeDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
   const { addToCart } = useContext(CartContext);
-  const [user, setUser] = useState(getUser());
-  const [showMsg, setShowMsg] = useState(false);
-
-  useEffect(() => {
-    if (!user) {
-      setShowMsg(true);
-      setTimeout(() => navigate('/login'), 1800);
-    }
-    // Listen for login/logout changes from other tabs
-    const syncUser = () => setUser(getUser());
-    window.addEventListener("storage", syncUser);
-    return () => window.removeEventListener("storage", syncUser);
-  }, [user, navigate]);
-
+  
   const recipe = recipeData[id] || recipeData[1]; // Fallback to recipe 1 if ID not found
   const [servings, setServings] = useState(recipe.servings);
 
@@ -425,22 +405,6 @@ const RecipeDetails = () => {
     ...ing,
     qty: (ing.qty * servings) / recipe.servings,
   }));
-
-  if (!user) {
-    return (
-      <div className="flex flex-col items-center justify-center min-h-[60vh]">
-        <div className="bg-white rounded-lg shadow-lg p-8 max-w-sm w-full text-center">
-          <h2 className="text-xl font-bold mb-2">Login Required</h2>
-          <p className="mb-4">Please login or sign up to view full recipe details.</p>
-          <div className="flex gap-4 justify-center">
-            <button onClick={() => navigate('/login')} className="bg-green-600 text-white px-4 py-2 rounded font-semibold hover:bg-green-700">Login</button>
-            <button onClick={() => navigate('/signup')} className="bg-gray-200 text-gray-700 px-4 py-2 rounded font-semibold hover:bg-gray-300">Sign Up</button>
-          </div>
-          {showMsg && <div className="mt-4 text-sm text-gray-400">Redirecting to login...</div>}
-        </div>
-      </div>
-    );
-  }
 
   return (
     <div className="max-w-6xl mx-auto px-2 sm:px-4 py-8 sm:py-10">
