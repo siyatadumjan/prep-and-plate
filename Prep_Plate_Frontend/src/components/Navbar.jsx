@@ -47,7 +47,6 @@ const Navbar = () => {
           <span className="text-green-600 font-bold text-xl whitespace-nowrap">Prep & Plate</span>
         </Link>
         <Link to="/" className="text-gray-700 hover:text-green-600">Home</Link>
-        <Link to="/dashboard" className="text-gray-700 hover:text-green-600">Dashboard</Link>
         <Link to="/recipes" className="text-gray-700 hover:text-green-600">Recipes</Link>
         <Link to="/cart" className="text-gray-700 hover:text-green-600">Cart</Link>
       </div>
