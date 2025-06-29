@@ -95,6 +95,8 @@ const Home = () => {
         <p className="mb-4">Sign up today and get your first delivery free.</p>
         <Link to="/signup" className="bg-white text-green-600 px-6 py-2 rounded font-semibold hover:bg-green-50">Get Started</Link>
       </section>
+      {/* Service Hour */}
+      <div className="text-center text-gray-500 text-sm mt-12 mb-4">Service Hour 08:00 AM to 9:00 PM</div>
     </div>
   );
 };

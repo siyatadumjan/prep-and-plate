@@ -120,6 +120,14 @@ const allRecipes = [
   }
 ];
 
+const cuisineOptions = [
+  { label: 'Vegetarian', value: 'Vegetarian' },
+  { label: 'Vegan', value: 'Vegan' },
+  { label: 'Dessert', value: 'Dessert' },
+  { label: 'Traditional', value: 'Traditional' },
+  { label: 'Popular', value: 'Popular' },
+];
+
 const Recipes = () => {
   const navigate = useNavigate();
   const location = useLocation();
@@ -132,6 +140,9 @@ const Recipes = () => {
   const [page, setPage] = useState(initialPage);
   const recipesPerPage = 6;
 
+  const [showFilters, setShowFilters] = useState(false);
+  const [selectedTags, setSelectedTags] = useState([]);
+
   // Update URL when page changes
   React.useEffect(() => {
     const params = new URLSearchParams(location.search);
@@ -142,7 +153,10 @@ const Recipes = () => {
     // eslint-disable-next-line
   }, [page]);
 
-  const filtered = allRecipes.filter(r => r.title.toLowerCase().includes(search.toLowerCase()));
+  const filtered = allRecipes.filter(r =>
+    r.title.toLowerCase().includes(search.toLowerCase()) &&
+    (selectedTags.length === 0 || (r.tag && selectedTags.includes(r.tag)))
+  );
   const paginated = filtered.slice((page-1)*recipesPerPage, page*recipesPerPage);
   const totalPages = Math.ceil(filtered.length / recipesPerPage);
 
@@ -151,6 +165,12 @@ const Recipes = () => {
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold">Recipes</h1>
         <div className="flex gap-2 items-center">
+          <button
+            className="border rounded px-3 py-1 text-sm font-semibold bg-gray-50 hover:bg-green-100 transition"
+            onClick={() => setShowFilters(f => !f)}
+          >
+            &#9776; Filters
+          </button>
           <input
             type="text"
             placeholder="Search recipes..."
@@ -160,6 +180,40 @@ const Recipes = () => {
           />
         </div>
       </div>
+      {/* Filter Sidebar */}
+      {showFilters && (
+        <div className="mb-8 max-w-md w-full bg-white rounded-lg shadow p-6 border border-green-100">
+          <div className="font-semibold mb-4 text-lg">Filters</div>
+          <div className="mb-4">
+            <div className="font-medium mb-2 text-gray-700">Cuisine/Type</div>
+            <div className="grid grid-cols-2 gap-2">
+              {cuisineOptions.map(opt => (
+                <label key={opt.value} className="flex items-center gap-2 cursor-pointer">
+                  <input
+                    type="checkbox"
+                    checked={selectedTags.includes(opt.value)}
+                    onChange={e => {
+                      if (e.target.checked) {
+                        setSelectedTags(tags => [...tags, opt.value]);
+                      } else {
+                        setSelectedTags(tags => tags.filter(t => t !== opt.value));
+                      }
+                    }}
+                    className="accent-green-600"
+                  />
+                  <span>{opt.label}</span>
+                </label>
+              ))}
+            </div>
+          </div>
+          <button
+            className="mt-4 bg-green-600 text-white px-4 py-2 rounded font-semibold hover:bg-green-700 transition"
+            onClick={() => setShowFilters(false)}
+          >
+            Done
+          </button>
+        </div>
+      )}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8 min-h-[600px]">
         {paginated.map(recipe => (
           <Link to={`/recipes/${recipe.id}`} key={recipe.id} className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col h-full">
@@ -204,6 +258,8 @@ const Recipes = () => {
           Next
         </button>
       </div>
+      {/* Add service hour at the bottom */}
+      <div className="text-center text-gray-500 text-sm mt-12 mb-4">Service Hour 08:00 AM to 9:00 PM</div>
     </div>
   );
 };
