@@ -434,6 +434,7 @@ const RecipeDetails = () => {
           <button onClick={handleOrder} className="bg-green-600 text-white px-6 py-2 rounded font-semibold hover:bg-green-700 mb-6 w-full sm:w-auto" disabled={!checked.some(Boolean)}>Order Ingredients</button>
           <div className="bg-gray-50 rounded-lg p-4 mb-4">
             <h2 className="font-semibold mb-2">Ingredients</h2>
+            <div className="text-xs text-gray-500 mb-2">Please tick at least one ingredient below to enable ordering.</div>
             <ul className="space-y-1">
               {adjustedIngredients.map((ing, i) => (
                 <li key={i} className="flex items-center gap-2">
