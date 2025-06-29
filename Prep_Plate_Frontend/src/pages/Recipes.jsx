@@ -17,7 +17,7 @@ const allRecipes = [
     img: "https://images.pexels.com/photos/5718025/pexels-photo-5718025.jpeg?auto=compress&cs=tinysrgb&w=400",
     time: "1 hr 30 min",
     servings: 4,
-    tag: "",
+    tag: "Non Vegetarian",
   },
   {
     id: 2,
@@ -35,7 +35,7 @@ const allRecipes = [
     img: "https://images.pexels.com/photos/5409010/pexels-photo-5409010.jpeg?auto=compress&cs=tinysrgb&w=400",
     time: "40 min",
     servings: 8,
-    tag: "Popular",
+    tag: "Non Vegetarian",
   },
   {
     id: 4,
@@ -53,7 +53,7 @@ const allRecipes = [
     img: beefStirFryImg,
     time: "30 min",
     servings: 4,
-    tag: "",
+    tag: "Non Vegetarian",
   },
   {
     id: 6,
@@ -89,7 +89,7 @@ const allRecipes = [
     img: beefTacosImg,
     time: "25 min",
     servings: 4,
-    tag: "",
+    tag: "Non Vegetarian",
   },
    {
     id: 10,
@@ -122,6 +122,7 @@ const allRecipes = [
 
 const cuisineOptions = [
   { label: 'Vegetarian', value: 'Vegetarian' },
+  { label: 'Non Vegetarian', value: 'Non Vegetarian' },
   { label: 'Vegan', value: 'Vegan' },
   { label: 'Dessert', value: 'Dessert' },
   { label: 'Traditional', value: 'Traditional' },
@@ -259,7 +260,7 @@ const Recipes = () => {
         </button>
       </div>
       {/* Add service hour at the bottom */}
-      <div className="text-center text-gray-500 text-sm mt-12 mb-4">Service Hour 08:00 AM to 9:00 PM</div>
+      <div className="text-center font-bold text-green-700 text-lg mt-12 mb-4">Service Hour 08:00 AM to 9:00 PM</div>
     </div>
   );
 };
