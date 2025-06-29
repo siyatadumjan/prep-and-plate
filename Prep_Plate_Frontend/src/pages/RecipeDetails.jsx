@@ -388,8 +388,15 @@ const RecipeDetails = () => {
   const [servings, setServings] = useState(recipe.servings);
   const [checked, setChecked] = useState(Array(recipe.ingredients.length).fill(false));
   const [orderWarning, setOrderWarning] = useState("");
+  const [showLoginModal, setShowLoginModal] = useState(false);
+
+  const user = localStorage.getItem('prep_plate_user');
 
   const handleOrder = () => {
+    if (!user) {
+      setShowLoginModal(true);
+      return;
+    }
     if (!checked.some(Boolean)) {
       setOrderWarning("Please select at least one ingredient to order.");
       return;
@@ -434,15 +441,20 @@ const RecipeDetails = () => {
           <button onClick={handleOrder} className="bg-green-600 text-white px-6 py-2 rounded font-semibold hover:bg-green-700 mb-6 w-full sm:w-auto" disabled={!checked.some(Boolean)}>Order Ingredients</button>
           <div className="bg-gray-50 rounded-lg p-4 mb-4">
             <h2 className="font-semibold mb-2">Ingredients</h2>
-            <div className="text-xs text-gray-500 mb-2">Please tick at least one ingredient below to enable ordering.</div>
+            <div className="font-semibold text-green-700 mb-4 text-base sm:text-lg">Tick ingredients below to enable ordering.</div>
             <ul className="space-y-1">
               {adjustedIngredients.map((ing, i) => (
                 <li key={i} className="flex items-center gap-2">
-                  <input type="checkbox" className="accent-green-600" checked={checked[i]} onChange={e => {
-                    const arr = [...checked];
-                    arr[i] = e.target.checked;
-                    setChecked(arr);
-                  }} />
+                  <input
+                    type="checkbox"
+                    className="accent-green-600"
+                    checked={checked[i]}
+                    onChange={e => {
+                      const arr = [...checked];
+                      arr[i] = e.target.checked;
+                      setChecked(arr);
+                    }}
+                  />
                   <span>{ing.qty} {ing.unit} {ing.name}</span>
                 </li>
               ))}
@@ -466,6 +478,29 @@ const RecipeDetails = () => {
           ))}
         </ol>
       </div>
+      {/* Login Modal */}
+      {showLoginModal && (
+        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
+          <div className="bg-white rounded-lg shadow-lg p-8 max-w-sm w-full text-center">
+            <h2 className="text-xl font-bold mb-4 text-green-700">You need to sign up or log in first!</h2>
+            <p className="mb-6 text-gray-600">Please log in or create an account to order ingredients.</p>
+            <div className="flex gap-4 justify-center">
+              <button
+                className="bg-green-600 text-white px-4 py-2 rounded font-semibold hover:bg-green-700 transition"
+                onClick={() => navigate('/login')}
+              >
+                Go to Login
+              </button>
+              <button
+                className="bg-gray-200 text-gray-700 px-4 py-2 rounded font-semibold hover:bg-gray-300 transition"
+                onClick={() => setShowLoginModal(false)}
+              >
+                Close
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

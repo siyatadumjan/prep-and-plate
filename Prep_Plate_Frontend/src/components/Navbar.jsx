@@ -48,7 +48,7 @@ const Navbar = () => {
         </Link>
         <Link to="/" className="text-gray-700 hover:text-green-600">Home</Link>
         <Link to="/recipes" className="text-gray-700 hover:text-green-600">Recipes</Link>
-        <Link to="/cart" className="text-gray-700 hover:text-green-600">Cart</Link>
+        {user && <Link to="/cart" className="text-gray-700 hover:text-green-600">Cart</Link>}
       </div>
       <div className="flex items-center gap-4 relative">
         <button

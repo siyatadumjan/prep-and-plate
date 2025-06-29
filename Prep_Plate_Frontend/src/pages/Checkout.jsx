@@ -35,6 +35,10 @@ const Checkout = () => {
             <input type="radio" name="payment" value="Khalti" checked={payment === "Khalti"} onChange={() => setPayment("Khalti")} className="accent-green-600" />
             <span>Khalti</span>
           </label>
+          <label className="flex items-center gap-3 p-3 border rounded-lg hover:bg-gray-50 cursor-pointer">
+            <input type="radio" name="payment" value="Cash on Delivery" checked={payment === "Cash on Delivery"} onChange={() => setPayment("Cash on Delivery")} className="accent-green-600" />
+            <span>Cash on Delivery</span>
+          </label>
         </div>
         
         <div className="border-t pt-4">
@@ -47,23 +51,27 @@ const Checkout = () => {
               onChange={e => setAddress(e.target.value)}
               required
             />
-            <input
-              type="tel"
-              className="w-full border rounded px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base"
-              placeholder="Enter your phone number"
-              value={phone}
-              onChange={e => {
-                const value = e.target.value;
-                setPhone(value);
-                // Validate Nepali phone number: 10 digits, starts with 98, 97, or 96
-                if (!/^9[876]\d{8}$/.test(value)) {
-                  setPhoneError("Enter a valid 10-digit Nepali mobile number (starts with 98, 97, or 96)");
-                } else {
-                  setPhoneError("");
-                }
-              }}
-              required
-            />
+            <div className="relative">
+              <span className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500 select-none">+977</span>
+              <input
+                type="tel"
+                className="w-full border rounded pl-14 pr-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-green-500 text-sm sm:text-base"
+                placeholder="Enter your phone number"
+                value={phone}
+                onChange={e => {
+                  const value = e.target.value.replace(/[^0-9]/g, '');
+                  setPhone(value);
+                  // Validate Nepali phone number: 10 digits, starts with 98, 97, or 96
+                  if (!/^9[876]\d{8}$/.test(value)) {
+                    setPhoneError("Enter a valid 10-digit Nepali mobile number (starts with 98, 97, or 96)");
+                  } else {
+                    setPhoneError("");
+                  }
+                }}
+                maxLength={10}
+                required
+              />
+            </div>
             {phoneError && <div className="text-red-500 text-sm mt-1">{phoneError}</div>}
         </div>
 
