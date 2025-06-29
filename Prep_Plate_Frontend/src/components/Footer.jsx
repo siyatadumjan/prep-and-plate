@@ -1,5 +1,4 @@
 import React from "react";
-import { FaFacebook, FaInstagram, FaTwitter } from "react-icons/fa";
 import { Link } from "react-router-dom";
 
 const Footer = () => (
@@ -11,11 +10,6 @@ const Footer = () => (
         <Link to="/about" className="hover:text-green-600">About Us</Link>
         <Link to="/contact" className="hover:text-green-600">Contact</Link>
         <Link to="/help" className="hover:text-green-600">Help</Link>
-      </div>
-      <div className="flex gap-4 text-xl text-gray-500">
-        <a href="#" aria-label="Facebook"><FaFacebook /></a>
-        <a href="#" aria-label="Instagram"><FaInstagram /></a>
-        <a href="#" aria-label="Twitter"><FaTwitter /></a>
       </div>
     </div>
     <div className="text-center text-xs text-gray-400 pb-4">© 2025 Prep & Plate. All rights reserved.</div>

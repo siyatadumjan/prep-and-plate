@@ -1,11 +1,12 @@
 import React from 'react';
+import chocolateCake from '../assets/chocolate-lava-cake.webp';
 
 const Help = () => (
   <div className="bg-white">
     {/* Hero Section */}
     <div className="relative h-64 bg-green-100">
       <img
-        src="https://images.pexels.com/photos/3992933/pexels-photo-3992933.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+        src={chocolateCake}
         alt="Support"
         className="w-full h-full object-cover"
       />

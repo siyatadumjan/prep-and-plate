@@ -118,6 +118,14 @@ const Profile = () => {
             )}
           </div>
         </form>
+        <div className="mt-8 flex justify-center">
+          <button
+            className="bg-green-600 text-white px-6 py-3 rounded-lg font-semibold text-lg shadow hover:bg-green-700 transition"
+            onClick={() => navigate('/recipes')}
+          >
+            Explore Recipes
+          </button>
+        </div>
       </section>
     </div>
   );

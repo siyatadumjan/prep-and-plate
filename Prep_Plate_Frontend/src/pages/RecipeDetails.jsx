@@ -386,8 +386,15 @@ const RecipeDetails = () => {
   
   const recipe = recipeData[id] || recipeData[1]; // Fallback to recipe 1 if ID not found
   const [servings, setServings] = useState(recipe.servings);
+  const [checked, setChecked] = useState(Array(recipe.ingredients.length).fill(false));
+  const [orderWarning, setOrderWarning] = useState("");
 
   const handleOrder = () => {
+    if (!checked.some(Boolean)) {
+      setOrderWarning("Please select at least one ingredient to order.");
+      return;
+    }
+    setOrderWarning("");
     const itemToAdd = {
       id: recipe.id,
       title: recipe.title,
@@ -424,17 +431,22 @@ const RecipeDetails = () => {
             <button onClick={() => setServings(s => s+1)} className="px-2 py-1 bg-gray-200 rounded">+</button>
             <span className="text-xs text-gray-400 ml-2">Ingredient quantities will adjust automatically to reduce waste</span>
           </div>
-          <button onClick={handleOrder} className="bg-green-600 text-white px-6 py-2 rounded font-semibold hover:bg-green-700 mb-6 w-full sm:w-auto">Order Ingredients</button>
+          <button onClick={handleOrder} className="bg-green-600 text-white px-6 py-2 rounded font-semibold hover:bg-green-700 mb-6 w-full sm:w-auto" disabled={!checked.some(Boolean)}>Order Ingredients</button>
           <div className="bg-gray-50 rounded-lg p-4 mb-4">
             <h2 className="font-semibold mb-2">Ingredients</h2>
             <ul className="space-y-1">
               {adjustedIngredients.map((ing, i) => (
                 <li key={i} className="flex items-center gap-2">
-                  <input type="checkbox" className="accent-green-600" />
+                  <input type="checkbox" className="accent-green-600" checked={checked[i]} onChange={e => {
+                    const arr = [...checked];
+                    arr[i] = e.target.checked;
+                    setChecked(arr);
+                  }} />
                   <span>{ing.qty} {ing.unit} {ing.name}</span>
                 </li>
               ))}
             </ul>
+            {orderWarning && <div className="text-red-500 text-sm mt-2">{orderWarning}</div>}
             <div className="mt-4 text-xs text-gray-500">
               <div>Nutrition Facts (per serving):</div>
               <div>Calories {recipe.nutrition.calories} | Protein {recipe.nutrition.protein}g | Carbs {recipe.nutrition.carbs}g | Fat {recipe.nutrition.fat}g</div>
