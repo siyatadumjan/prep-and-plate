@@ -6,8 +6,6 @@ const Footer = () => (
     <div className="max-w-6xl mx-auto px-4 py-8 flex flex-col md:flex-row items-center justify-between gap-4">
       <div className="flex flex-wrap gap-6 text-sm text-gray-600">
         <Link to="/" className="hover:text-green-600">Home</Link>
-        <Link to="/recipes" className="hover:text-green-600">Recipes</Link>
-        <Link to="/about" className="hover:text-green-600">About Us</Link>
         <Link to="/contact" className="hover:text-green-600">Contact</Link>
         <Link to="/help" className="hover:text-green-600">Help</Link>
       </div>

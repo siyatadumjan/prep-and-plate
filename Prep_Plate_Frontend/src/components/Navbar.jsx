@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { FaUserCircle } from "react-icons/fa";
+import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
 import logo from "../assets/Orange Modern Cargo Delivery Company Logo (1).png";
 
 const getUser = () => {
@@ -40,19 +40,25 @@ const Navbar = () => {
   };
 
   return (
-    <nav className="bg-white shadow-sm px-6 py-3 flex items-center justify-between">
-      <div className="flex items-center gap-8">
-        <Link to="/" className="flex items-center mr-8 h-12 gap-2">
+    <nav className="bg-green-50 shadow-sm px-6 py-3 flex items-center relative">
+      <div className="flex items-center mr-8 h-12 gap-2 z-10">
+        <Link to="/" className="flex items-center h-12 gap-2">
           <img src={logo} alt="Prep & Plate Logo" className="h-12 min-w-[48px] w-auto object-contain align-middle" />
           <span className="text-green-600 font-bold text-xl whitespace-nowrap">Prep & Plate</span>
         </Link>
-        <Link to="/" className="text-gray-700 hover:text-green-600">Home</Link>
-        <Link to="/recipes" className="text-gray-700 hover:text-green-600">Recipes</Link>
-        {user && <Link to="/cart" className="text-gray-700 hover:text-green-600">Cart</Link>}
       </div>
-      <div className="flex items-center gap-4 relative">
+      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2">
+        <div className="flex gap-8">
+          <Link to="/recipes" className="text-gray-700 hover:text-green-600">Recipes</Link>
+          <Link to="/about" className="text-gray-700 hover:text-green-600">About Us</Link>
+        </div>
+      </div>
+      <div className="flex items-center gap-10 relative ml-auto z-10">
+        <Link to="/cart" className="text-gray-700 hover:text-green-600 text-xl relative">
+          <FaShoppingCart />
+        </Link>
         <button
-          className="text-gray-700 hover:text-green-600 text-3xl relative"
+          className="text-gray-700 hover:text-green-600 text-xl relative"
           onClick={() => setDropdown((d) => !d)}
         >
           <FaUserCircle />

@@ -32,43 +32,51 @@ const Home = () => {
   const navigate = useNavigate();
 
   return (
-    <div>
+    <div className="bg-green-50 min-h-screen">
       {/* Hero Section */}
-      <section className="relative w-full h-[60vh] md:h-[80vh] flex items-center justify-center mb-8">
-        <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?auto=format&fit=crop&w=1600&q=80" alt="Hero" className="absolute inset-0 w-full h-full object-cover rounded-xl shadow-lg" />
-        <div className="relative z-10 flex flex-col items-center justify-center w-full h-full">
-          <div className="px-8 py-8 max-w-2xl mx-auto text-center">
-            <h1 className="text-4xl md:text-5xl font-bold text-white mb-4 drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">Prep & Plate</h1>
-            <p className="max-w-xl text-white md:text-lg mb-0 mx-auto drop-shadow-[0_2px_8px_rgba(0,0,0,0.8)]">Cook with confidence using precisely measured ingredients. Reduce waste, save money, and enjoy delicious home-cooked meals.</p>
+      <section className="w-full flex items-center justify-center bg-green-50 py-16 mb-8 border-b">
+        <div className="flex flex-col items-center justify-center w-full">
+          <h1 className="text-4xl md:text-5xl font-extrabold text-center mb-2 max-w-4xl">
+            Cook Perfect Meals with <span className="text-green-600">Zero Food Waste</span>
+          </h1>
+          <p className="max-w-4xl text-gray-700 md:text-lg mb-8 text-center">
+            Get pre-measured ingredients delivered to your door. Just tell us how many people you're cooking for, and we'll calculate the exact quantities you need.
+          </p>
+          <div className="flex justify-center">
+            <Link to="/recipes" className="bg-green-600 text-white px-8 py-3 rounded font-semibold shadow hover:bg-green-700 transition">Explore Recipes</Link>
           </div>
         </div>
       </section>
 
-      {/* How it Works */}
-      <section className="py-12 px-4 max-w-5xl mx-auto">
-        <h2 className="text-2xl font-semibold text-center mb-2">How Prep & Plate Works</h2>
-        <p className="text-center text-gray-500 mb-8">Cook with confidence using our perfectly portioned ingredients</p>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          <div className="bg-green-50 rounded-lg p-6 text-center">
-            <div className="text-3xl mb-2">🍽️</div>
-            <h3 className="font-semibold mb-1">Choose Your Recipes</h3>
-            <p className="text-gray-500 text-sm">Browse our collection of recipes and select meals that you'd like to cook at home.</p>
+      {/* Benefits Section */}
+      <section className="w-full bg-green-100 py-12 flex flex-col items-center">
+        <div className="max-w-5xl w-full grid grid-cols-1 md:grid-cols-3 gap-8 px-4">
+          <div className="flex flex-col items-center text-center">
+            <div className="bg-white rounded-full shadow p-4 mb-4">
+              <span className="text-green-600 text-3xl">🍃</span>
+            </div>
+            <h3 className="font-semibold text-lg mb-2">Zero Waste</h3>
+            <p className="text-gray-600">Pre-measured ingredients mean no leftovers, no waste, just perfect portions.</p>
           </div>
-          <div className="bg-green-50 rounded-lg p-6 text-center">
-            <div className="text-3xl mb-2">⚖️</div>
-            <h3 className="font-semibold mb-1">Precise Ingredients</h3>
-            <p className="text-gray-500 text-sm">Receive exactly what you need - no more wasted food or measuring guesswork.</p>
+          <div className="flex flex-col items-center text-center">
+            <div className="bg-white rounded-full shadow p-4 mb-4">
+              <span className="text-green-600 text-3xl">⏰</span>
+            </div>
+            <h3 className="font-semibold text-lg mb-2">Save Time</h3>
+            <p className="text-gray-600">Skip the shopping and measuring. Everything arrives ready to cook.</p>
           </div>
-          <div className="bg-green-50 rounded-lg p-6 text-center">
-            <div className="text-3xl mb-2">🚚</div>
-            <h3 className="font-semibold mb-1">Home Delivery</h3>
-            <p className="text-gray-500 text-sm">Get fresh ingredients delivered to your door, ready to cook with easy instructions.</p>
+          <div className="flex flex-col items-center text-center">
+            <div className="bg-white rounded-full shadow p-4 mb-4">
+              <span className="text-green-600 text-3xl">👥</span>
+            </div>
+            <h3 className="font-semibold text-lg mb-2">Perfect Portions</h3>
+            <p className="text-gray-600">Automatically scaled for your exact number of guests or family members.</p>
           </div>
         </div>
       </section>
 
       {/* Featured Recipes */}
-      <section className="py-12 px-4 max-w-6xl mx-auto">
+      <section className="py-12 px-4 max-w-6xl mx-auto bg-green-50">
         <div className="flex items-center justify-between mb-6">
           <h2 className="text-xl font-semibold">Featured Recipes</h2>
         </div>
@@ -88,15 +96,6 @@ const Home = () => {
           ))}
         </div>
       </section>
-
-      {/* Call to Action */}
-      <section className="bg-green-600 py-10 px-4 text-center text-white mt-8">
-        <h2 className="text-2xl font-semibold mb-2">Ready to start cooking?</h2>
-        <p className="mb-4">Sign up today and get your first delivery free.</p>
-        <Link to="/signup" className="bg-white text-green-600 px-6 py-2 rounded font-semibold hover:bg-green-50">Get Started</Link>
-      </section>
-      {/* Service Hour */}
-      <div className="text-center font-bold text-green-700 text-lg mt-12 mb-4">Service Hour 08:00 AM to 9:00 PM</div>
     </div>
   );
 };

@@ -9,6 +9,7 @@ import paniPuriImg from "../assets/pani-puri.jpg";
 import beefTacosImg from "../assets/beef-tacos.webp";
 import chocolateLavaCakeImg from "../assets/chocolate-lava-cake.webp";
 import samosaImg from "../assets/samosa.avif";
+import { FaShoppingCart } from "react-icons/fa";
 
 const recipeData = {
   1: {
@@ -19,15 +20,16 @@ const recipeData = {
     servings: 2,
     pricePerServing: 850,
     time: "1 hr 30 min",
+    difficulty: "Medium",
     ingredients: [
-      { name: "Whole chicken", qty: 1.5, unit: "kg" },
-      { name: "Lemons", qty: 2, unit: "" },
-      { name: "Fresh rosemary", qty: 3, unit: "sprigs" },
-      { name: "Fresh thyme", qty: 4, unit: "sprigs" },
-      { name: "Garlic cloves", qty: 6, unit: "" },
-      { name: "Olive oil", qty: 2, unit: "tbsp" },
-      { name: "Salt", qty: 1, unit: "tsp" },
-      { name: "Black pepper", qty: 0.5, unit: "tsp" },
+      { name: "Whole chicken", qty: 1.5, unit: "kg", price: 500 },
+      { name: "Lemons", qty: 2, unit: "pieces", price: 40 },
+      { name: "Fresh rosemary", qty: 3, unit: "sprigs", price: 30 },
+      { name: "Fresh thyme", qty: 4, unit: "sprigs", price: 30 },
+      { name: "Garlic cloves", qty: 6, unit: "pieces", price: 20 },
+      { name: "Olive oil", qty: 2, unit: "tbsp", price: 25 },
+      { name: "Salt", qty: 1, unit: "tsp", price: 5 },
+      { name: "Black pepper", qty: 0.5, unit: "tsp", price: 5 },
     ],
     nutrition: { calories: 350, protein: 42, carbs: 2, fat: 18 },
     instructions: [
@@ -49,18 +51,19 @@ const recipeData = {
     servings: 2,
     pricePerServing: 600,
     time: "30 min",
+    difficulty: "Easy",
     ingredients: [
-      { name: "Penne pasta", qty: 200, unit: "g" },
-      { name: "Broccoli florets", qty: 1, unit: "cup" },
-      { name: "Red bell pepper, sliced", qty: 0.5, unit: "cup" },
-      { name: "Zucchini, sliced", qty: 0.5, unit: "cup" },
-      { name: "Carrot, julienned", qty: 0.5, unit: "cup" },
-      { name: "Cherry tomatoes, halved", qty: 0.5, unit: "cup" },
-      { name: "Olive oil", qty: 2, unit: "tbsp" },
-      { name: "Garlic cloves, minced", qty: 2, unit: "" },
-      { name: "Salt", qty: 0.5, unit: "tsp" },
-      { name: "Black pepper", qty: 0.25, unit: "tsp" },
-      { name: "Parmesan cheese, grated (optional)", qty: 2, unit: "tbsp" },
+      { name: "Penne pasta", qty: 200, unit: "g", price: 100 },
+      { name: "Broccoli florets", qty: 1, unit: "cup", price: 50 },
+      { name: "Red bell pepper, sliced", qty: 1, unit: "piece", price: 25 },
+      { name: "Zucchini, sliced", qty: 1, unit: "piece", price: 25 },
+      { name: "Carrot, julienned", qty: 1, unit: "piece", price: 25 },
+      { name: "Cherry tomatoes, halved", qty: 8, unit: "pieces", price: 50 },
+      { name: "Olive oil", qty: 2, unit: "tbsp", price: 10 },
+      { name: "Garlic cloves, minced", qty: 2, unit: "", price: 10 },
+      { name: "Salt", qty: 0.5, unit: "tsp", price: 5 },
+      { name: "Black pepper", qty: 0.25, unit: "tsp", price: 5 },
+      { name: "Parmesan cheese, grated (optional)", qty: 2, unit: "tbsp", price: 20 },
     ],
     nutrition: { calories: 320, protein: 10, carbs: 58, fat: 7 },
     instructions: [
@@ -80,18 +83,19 @@ const recipeData = {
     servings: 2,
     pricePerServing: 500,
     time: "50 min",
+    difficulty: "Medium",
     ingredients: [
-      { name: "All-purpose flour", qty: 1, unit: "cup" },
-      { name: "Minced chicken", qty: 200, unit: "g" },
-      { name: "Onion, finely chopped", qty: 0.5, unit: "cup" },
-      { name: "Green onion, chopped", qty: 0.25, unit: "cup" },
-      { name: "Garlic, minced", qty: 2, unit: "cloves" },
-      { name: "Ginger, minced", qty: 1, unit: "tsp" },
-      { name: "Soy sauce", qty: 1, unit: "tbsp" },
-      { name: "Salt", qty: 0.5, unit: "tsp" },
-      { name: "Black pepper", qty: 0.25, unit: "tsp" },
-      { name: "Water (for dough)", qty: 0.5, unit: "cup" },
-      { name: "Oil", qty: 1, unit: "tbsp" },
+      { name: "All-purpose flour", qty: 1, unit: "cup", price: 50 },
+      { name: "Minced chicken", qty: 200, unit: "g", price: 200 },
+      { name: "Onion, finely chopped", qty: 0.5, unit: "cup", price: 25 },
+      { name: "Green onion, chopped", qty: 0.25, unit: "cup", price: 15 },
+      { name: "Garlic, minced", qty: 2, unit: "cloves", price: 10 },
+      { name: "Ginger, minced", qty: 1, unit: "tsp", price: 5 },
+      { name: "Soy sauce", qty: 1, unit: "tbsp", price: 10 },
+      { name: "Salt", qty: 0.5, unit: "tsp", price: 5 },
+      { name: "Black pepper", qty: 0.25, unit: "tsp", price: 5 },
+      { name: "Water (for dough)", qty: 0.5, unit: "cup", price: 25 },
+      { name: "Oil", qty: 1, unit: "tbsp", price: 10 },
     ],
     nutrition: { calories: 290, protein: 14, carbs: 38, fat: 8 },
     instructions: [
@@ -111,14 +115,15 @@ const recipeData = {
     servings: 4,
     pricePerServing: 300,
     time: "1 hr",
+    difficulty: "Medium",
     ingredients: [
-      { name: "Rice flour", qty: 2, unit: "cups" },
-      { name: "Sugar", qty: 0.75, unit: "cup" },
-      { name: "Milk", qty: 1, unit: "cup" },
-      { name: "Ripe banana, mashed", qty: 1, unit: "" },
-      { name: "Ghee or butter (melted)", qty: 2, unit: "tbsp" },
-      { name: "Cardamom powder", qty: 0.5, unit: "tsp" },
-      { name: "Oil (for frying)", qty: 2, unit: "cups" },
+      { name: "Rice flour", qty: 2, unit: "cups", price: 100 },
+      { name: "Sugar", qty: 0.75, unit: "cup", price: 25 },
+      { name: "Milk", qty: 1, unit: "cup", price: 50 },
+      { name: "Ripe banana, mashed", qty: 1, unit: "", price: 50 },
+      { name: "Ghee or butter (melted)", qty: 2, unit: "tbsp", price: 20 },
+      { name: "Cardamom powder", qty: 0.5, unit: "tsp", price: 5 },
+      { name: "Oil (for frying)", qty: 2, unit: "cups", price: 100 },
     ],
     nutrition: { calories: 220, protein: 3, carbs: 45, fat: 3 },
     instructions: [
@@ -139,17 +144,18 @@ const recipeData = {
     servings: 4,
     pricePerServing: 700,
     time: "30 min",
+    difficulty: "Medium",
     ingredients: [
-      { name: "Beef sirloin, thinly sliced", qty: 300, unit: "g" },
-      { name: "Broccoli florets", qty: 1, unit: "cup" },
-      { name: "Carrot, julienned", qty: 0.5, unit: "cup" },
-      { name: "Red bell pepper, sliced", qty: 0.5, unit: "cup" },
-      { name: "Snow peas", qty: 0.5, unit: "cup" },
-      { name: "Soy sauce", qty: 2, unit: "tbsp" },
-      { name: "Garlic cloves, minced", qty: 2, unit: "" },
-      { name: "Ginger, minced", qty: 1, unit: "tsp" },
-      { name: "Vegetable oil", qty: 1, unit: "tbsp" },
-      { name: "Sesame seeds (optional)", qty: 1, unit: "tsp" },
+      { name: "Beef sirloin, thinly sliced", qty: 300, unit: "g", price: 200 },
+      { name: "Broccoli florets", qty: 1, unit: "cup", price: 50 },
+      { name: "Carrot, julienned", qty: 0.5, unit: "cup", price: 25 },
+      { name: "Red bell pepper, sliced", qty: 1, unit: "piece", price: 25 },
+      { name: "Snow peas", qty: 0.5, unit: "cup", price: 50 },
+      { name: "Soy sauce", qty: 2, unit: "tbsp", price: 10 },
+      { name: "Garlic cloves, minced", qty: 2, unit: "", price: 10 },
+      { name: "Ginger, minced", qty: 1, unit: "tsp", price: 5 },
+      { name: "Vegetable oil", qty: 1, unit: "tbsp", price: 10 },
+      { name: "Sesame seeds (optional)", qty: 1, unit: "tsp", price: 5 },
     ],
     nutrition: { calories: 320, protein: 28, carbs: 12, fat: 18 },
     instructions: [
@@ -168,21 +174,22 @@ const recipeData = {
     servings: 2,
     pricePerServing: 500,
     time: "40 min",
+    difficulty: "Medium",
     ingredients: [
-      { name: "Paneer (cubed)", qty: 200, unit: "g" },
-      { name: "Fresh spinach (palak)", qty: 250, unit: "g" },
-      { name: "Onion (chopped)", qty: 1, unit: "medium" },
-      { name: "Tomato (chopped)", qty: 1, unit: "medium" },
-      { name: "Garlic cloves (minced)", qty: 3, unit: "" },
-      { name: "Ginger (minced)", qty: 1, unit: "tsp" },
-      { name: "Green chili (optional)", qty: 1, unit: "" },
-      { name: "Cumin seeds", qty: 0.5, unit: "tsp" },
-      { name: "Garam masala", qty: 0.5, unit: "tsp" },
-      { name: "Turmeric powder", qty: 0.25, unit: "tsp" },
-      { name: "Red chili powder", qty: 0.25, unit: "tsp" },
-      { name: "Cream (optional)", qty: 2, unit: "tbsp" },
-      { name: "Salt", qty: 0.5, unit: "tsp" },
-      { name: "Oil or ghee", qty: 1, unit: "tbsp" },
+      { name: "Paneer (cubed)", qty: 200, unit: "g", price: 100 },
+      { name: "Fresh spinach (palak)", qty: 250, unit: "g", price: 50 },
+      { name: "Onion (chopped)", qty: 1, unit: "medium", price: 25 },
+      { name: "Tomato (chopped)", qty: 1, unit: "medium", price: 25 },
+      { name: "Garlic cloves (minced)", qty: 3, unit: "", price: 15 },
+      { name: "Ginger (minced)", qty: 1, unit: "tsp", price: 5 },
+      { name: "Green chili (optional)", qty: 1, unit: "", price: 10 },
+      { name: "Cumin seeds", qty: 0.5, unit: "tsp", price: 5 },
+      { name: "Garam masala", qty: 0.5, unit: "tsp", price: 5 },
+      { name: "Turmeric powder", qty: 0.25, unit: "tsp", price: 5 },
+      { name: "Red chili powder", qty: 0.25, unit: "tsp", price: 5 },
+      { name: "Cream (optional)", qty: 2, unit: "tbsp", price: 20 },
+      { name: "Salt", qty: 0.5, unit: "tsp", price: 5 },
+      { name: "Oil or ghee", qty: 1, unit: "tbsp", price: 10 },
     ],
     nutrition: { calories: 320, protein: 14, carbs: 12, fat: 24 },
     instructions: [
@@ -203,16 +210,17 @@ const recipeData = {
     servings: 2,
     pricePerServing: 600,
     time: "50 min",
+    difficulty: "Medium",
     ingredients: [
-      { name: "Sushi-grade tuna (diced)", qty: 100, unit: "g" },
-      { name: "Sriracha sauce", qty: 1, unit: "tbsp" },
-      { name: "Mayonnaise", qty: 2, unit: "tbsp" },
-      { name: "Cooked sushi rice", qty: 2, unit: "cups" },
-      { name: "Nori sheets", qty: 2, unit: "" },
-      { name: "Cucumber (julienned)", qty: 0.25, unit: "cup" },
-      { name: "Green onion (chopped)", qty: 1, unit: "tbsp" },
-      { name: "Soy sauce (for serving)", qty: 2, unit: "tbsp" },
-      { name: "Wasabi & pickled ginger (optional)", qty: 1, unit: "serving" },
+      { name: "Sushi-grade tuna (diced)", qty: 100, unit: "g", price: 100 },
+      { name: "Sriracha sauce", qty: 1, unit: "tbsp", price: 10 },
+      { name: "Mayonnaise", qty: 2, unit: "tbsp", price: 20 },
+      { name: "Cooked sushi rice", qty: 2, unit: "cups", price: 100 },
+      { name: "Nori sheets", qty: 2, unit: "", price: 20 },
+      { name: "Cucumber (julienned)", qty: 0.25, unit: "cup", price: 25 },
+      { name: "Green onion (chopped)", qty: 1, unit: "tbsp", price: 5 },
+      { name: "Soy sauce (for serving)", qty: 2, unit: "tbsp", price: 10 },
+      { name: "Wasabi & pickled ginger (optional)", qty: 1, unit: "serving", price: 5 },
     ],
     nutrition: { calories: 350, protein: 18, carbs: 48, fat: 8 },
     instructions: [
@@ -231,14 +239,15 @@ const recipeData = {
     servings: 3,
     pricePerServing: 400,
     time: "30 min",
+    difficulty: "Easy",
     ingredients: [
-      { name: "Pizza dough", qty: 1, unit: "base" },
-      { name: "Tomato sauce", qty: 0.5, unit: "cup" },
-      { name: "Fresh mozzarella cheese (sliced)", qty: 150, unit: "g" },
-      { name: "Fresh basil leaves", qty: 8, unit: "" },
-      { name: "Olive oil", qty: 1, unit: "tbsp" },
-      { name: "Salt", qty: 0.25, unit: "tsp" },
-      { name: "Black pepper", qty: 0.25, unit: "tsp" },
+      { name: "Pizza dough", qty: 1, unit: "base", price: 50 },
+      { name: "Tomato sauce", qty: 0.5, unit: "cup", price: 25 },
+      { name: "Fresh mozzarella cheese (sliced)", qty: 150, unit: "g", price: 100 },
+      { name: "Fresh basil leaves", qty: 8, unit: "", price: 20 },
+      { name: "Olive oil", qty: 1, unit: "tbsp", price: 10 },
+      { name: "Salt", qty: 0.25, unit: "tsp", price: 5 },
+      { name: "Black pepper", qty: 0.25, unit: "tsp", price: 5 },
     ],
     nutrition: { calories: 270, protein: 11, carbs: 34, fat: 10 },
     instructions: [
@@ -259,19 +268,20 @@ const recipeData = {
     servings: 4,
     pricePerServing: 350,
     time: "25 min",
+    difficulty: "Medium",
     ingredients: [
-      { name: "Ground beef", qty: 400, unit: "g" },
-      { name: "Taco shells (soft or crispy)", qty: 8, unit: "pieces" },
-      { name: "Onion (chopped)", qty: 1, unit: "small" },
-      { name: "Garlic cloves (minced)", qty: 2, unit: "" },
-      { name: "Tomato (chopped)", qty: 1, unit: "medium" },
-      { name: "Taco seasoning", qty: 2, unit: "tbsp" },
-      { name: "Lettuce (shredded)", qty: 1, unit: "cup" },
-      { name: "Cheddar cheese (grated)", qty: 0.5, unit: "cup" },
-      { name: "Sour cream", qty: 0.25, unit: "cup" },
-      { name: "Salt", qty: 0.5, unit: "tsp" },
-      { name: "Black pepper", qty: 0.25, unit: "tsp" },
-      { name: "Oil", qty: 1, unit: "tbsp" },
+      { name: "Ground beef", qty: 400, unit: "g", price: 200 },
+      { name: "Taco shells (soft or crispy)", qty: 8, unit: "pieces", price: 80 },
+      { name: "Onion (chopped)", qty: 1, unit: "small", price: 25 },
+      { name: "Garlic cloves (minced)", qty: 2, unit: "", price: 10 },
+      { name: "Tomato (chopped)", qty: 1, unit: "medium", price: 50 },
+      { name: "Taco seasoning", qty: 2, unit: "tbsp", price: 10 },
+      { name: "Lettuce (shredded)", qty: 1, unit: "cup", price: 25 },
+      { name: "Cheddar cheese (grated)", qty: 0.5, unit: "cup", price: 50 },
+      { name: "Sour cream", qty: 0.25, unit: "cup", price: 20 },
+      { name: "Salt", qty: 0.5, unit: "tsp", price: 5 },
+      { name: "Black pepper", qty: 0.25, unit: "tsp", price: 5 },
+      { name: "Oil", qty: 1, unit: "tbsp", price: 10 },
     ],
     nutrition: { calories: 290, protein: 16, carbs: 22, fat: 15 },
     instructions: [
@@ -291,16 +301,17 @@ const recipeData = {
     servings: 2,
     pricePerServing: 250,
     time: "22 min",
+    difficulty: "Medium",
     ingredients: [
-      { name: "Dark chocolate (chopped)", qty: 100, unit: "g" },
-      { name: "Unsalted butter", qty: 50, unit: "g" },
-      { name: "Eggs", qty: 2, unit: "" },
-      { name: "Powdered sugar", qty: 0.5, unit: "cup" },
-      { name: "All-purpose flour", qty: 0.25, unit: "cup" },
-      { name: "Vanilla extract", qty: 0.5, unit: "tsp" },
-      { name: "Salt", qty: 1, unit: "pinch" },
-      { name: "Butter (for greasing)", qty: 1, unit: "tbsp" },
-      { name: "Cocoa powder (for dusting)", qty: 1, unit: "tbsp" },
+      { name: "Dark chocolate (chopped)", qty: 100, unit: "g", price: 50 },
+      { name: "Unsalted butter", qty: 50, unit: "g", price: 20 },
+      { name: "Eggs", qty: 2, unit: "", price: 50 },
+      { name: "Powdered sugar", qty: 0.5, unit: "cup", price: 25 },
+      { name: "All-purpose flour", qty: 0.25, unit: "cup", price: 20 },
+      { name: "Vanilla extract", qty: 0.5, unit: "tsp", price: 5 },
+      { name: "Salt", qty: 1, unit: "pinch", price: 5 },
+      { name: "Butter (for greasing)", qty: 1, unit: "tbsp", price: 10 },
+      { name: "Cocoa powder (for dusting)", qty: 1, unit: "tbsp", price: 5 },
     ],
     nutrition: { calories: 370, protein: 6, carbs: 38, fat: 22 },
     instructions: [
@@ -320,17 +331,18 @@ const recipeData = {
     servings: 4,
     pricePerServing: 120,
     time: "30 min",
+    difficulty: "Easy",
     ingredients: [
-      { name: "Puris (crispy shells)", qty: 24, unit: "pieces" },
-      { name: "Boiled potatoes (mashed)", qty: 2, unit: "medium" },
-      { name: "Boiled chickpeas", qty: 0.5, unit: "cup" },
-      { name: "Onion (finely chopped)", qty: 1, unit: "small" },
-      { name: "Fresh coriander (chopped)", qty: 2, unit: "tbsp" },
-      { name: "Tamarind chutney", qty: 0.25, unit: "cup" },
-      { name: "Green chutney", qty: 0.25, unit: "cup" },
-      { name: "Chaat masala", qty: 1, unit: "tsp" },
-      { name: "Salt", qty: 0.5, unit: "tsp" },
-      { name: "Spicy flavored water (pani)", qty: 2, unit: "cups" },
+      { name: "Puris (crispy shells)", qty: 24, unit: "pieces", price: 120 },
+      { name: "Boiled potatoes (mashed)", qty: 2, unit: "medium", price: 50 },
+      { name: "Boiled chickpeas", qty: 0.5, unit: "cup", price: 25 },
+      { name: "Onion (finely chopped)", qty: 1, unit: "small", price: 25 },
+      { name: "Fresh coriander (chopped)", qty: 2, unit: "tbsp", price: 10 },
+      { name: "Tamarind chutney", qty: 0.25, unit: "cup", price: 20 },
+      { name: "Green chutney", qty: 0.25, unit: "cup", price: 20 },
+      { name: "Chaat masala", qty: 1, unit: "tsp", price: 5 },
+      { name: "Salt", qty: 0.5, unit: "tsp", price: 5 },
+      { name: "Spicy flavored water (pani)", qty: 2, unit: "cups", price: 50 },
     ],
     nutrition: { calories: 180, protein: 4, carbs: 36, fat: 2 },
     instructions: [
@@ -350,22 +362,23 @@ const recipeData = {
     servings: 4,
     pricePerServing: 80,
     time: "1 hr",
+    difficulty: "Medium",
     ingredients: [
-      { name: "All-purpose flour", qty: 1.5, unit: "cups" },
-      { name: "Oil (for dough)", qty: 2, unit: "tbsp" },
-      { name: "Salt", qty: 0.5, unit: "tsp" },
-      { name: "Water (as needed)", qty: 0.5, unit: "cup" },
-      { name: "Potatoes (boiled, mashed)", qty: 3, unit: "medium" },
-      { name: "Green peas (boiled)", qty: 0.5, unit: "cup" },
-      { name: "Green chili (chopped)", qty: 1, unit: "" },
-      { name: "Ginger (grated)", qty: 1, unit: "tsp" },
-      { name: "Cumin seeds", qty: 0.5, unit: "tsp" },
-      { name: "Coriander powder", qty: 1, unit: "tsp" },
-      { name: "Garam masala", qty: 0.5, unit: "tsp" },
-      { name: "Red chili powder", qty: 0.25, unit: "tsp" },
-      { name: "Lemon juice", qty: 1, unit: "tsp" },
-      { name: "Fresh coriander (chopped)", qty: 2, unit: "tbsp" },
-      { name: "Oil (for frying)", qty: 2, unit: "cups" },
+      { name: "All-purpose flour", qty: 1.5, unit: "cups", price: 50 },
+      { name: "Oil (for dough)", qty: 2, unit: "tbsp", price: 10 },
+      { name: "Salt", qty: 0.5, unit: "tsp", price: 5 },
+      { name: "Water (as needed)", qty: 0.5, unit: "cup", price: 25 },
+      { name: "Potatoes (boiled, mashed)", qty: 3, unit: "medium", price: 100 },
+      { name: "Green peas (boiled)", qty: 0.5, unit: "cup", price: 25 },
+      { name: "Green chili (chopped)", qty: 1, unit: "", price: 10 },
+      { name: "Ginger (grated)", qty: 1, unit: "tsp", price: 5 },
+      { name: "Cumin seeds", qty: 0.5, unit: "tsp", price: 5 },
+      { name: "Coriander powder", qty: 1, unit: "tsp", price: 5 },
+      { name: "Garam masala", qty: 0.5, unit: "tsp", price: 5 },
+      { name: "Red chili powder", qty: 0.25, unit: "tsp", price: 5 },
+      { name: "Lemon juice", qty: 1, unit: "tsp", price: 5 },
+      { name: "Fresh coriander (chopped)", qty: 2, unit: "tbsp", price: 10 },
+      { name: "Oil (for frying)", qty: 2, unit: "cups", price: 100 },
     ],
     nutrition: { calories: 150, protein: 3, carbs: 22, fat: 6 },
     instructions: [
@@ -388,119 +401,94 @@ const RecipeDetails = () => {
   const [servings, setServings] = useState(recipe.servings);
   const [checked, setChecked] = useState(Array(recipe.ingredients.length).fill(false));
   const [orderWarning, setOrderWarning] = useState("");
-  const [showLoginModal, setShowLoginModal] = useState(false);
 
   const user = localStorage.getItem('prep_plate_user');
 
   const handleOrder = () => {
     if (!user) {
-      setShowLoginModal(true);
+      navigate('/login');
       return;
     }
-    if (!checked.some(Boolean)) {
-      setOrderWarning("Please select at least one ingredient to order.");
-      return;
-    }
-    setOrderWarning("");
     const itemToAdd = {
       id: recipe.id,
       title: recipe.title,
       img: recipe.img,
       servings: servings,
-      price: recipe.pricePerServing * servings,
-      pricePerServing: recipe.pricePerServing
+      price: Number(totalPrice),
+      pricePerServing: (Number(totalPrice) / servings).toFixed(2)
     };
     addToCart(itemToAdd);
     navigate('/cart');
   };
 
-  // Adjust ingredient quantities based on servings
+  // Calculate adjusted price for each ingredient based on servings
   const adjustedIngredients = recipe.ingredients.map(ing => ({
     ...ing,
     qty: (ing.qty * servings) / recipe.servings,
+    adjustedPrice: ((ing.price || 0) * servings / recipe.servings)
   }));
 
+  const totalPrice = adjustedIngredients.reduce((sum, ing) => sum + ing.adjustedPrice, 0).toFixed(2);
+
   return (
-    <div className="max-w-6xl mx-auto px-2 sm:px-4 py-8 sm:py-10">
-      <div className="flex flex-col md:flex-row gap-8">
-        <img src={recipe.img} alt={recipe.title} className="rounded-xl shadow-lg w-full md:w-1/2 object-cover max-h-72 sm:max-h-96 md:max-h-[28rem]" />
-        <div className="flex-1">
-          <h1 className="text-2xl sm:text-3xl font-bold mb-2">{recipe.title}</h1>
-          <p className="text-gray-600 mb-4 text-base sm:text-lg">{recipe.desc}</p>
-          <div className="flex items-center gap-4 mb-4 text-sm sm:text-base">
-            <span className="text-gray-500">⏱ {recipe.time}</span>
-            <span className="text-gray-500">🍽 {servings} servings</span>
-          </div>
-          <div className="flex items-center gap-2 mb-6 flex-wrap">
-            <span className="font-medium">Adjust servings:</span>
-            <button onClick={() => setServings(s => Math.max(1, s-1))} className="px-2 py-1 bg-gray-200 rounded">-</button>
-            <span className="px-3">{servings}</span>
-            <button onClick={() => setServings(s => s+1)} className="px-2 py-1 bg-gray-200 rounded">+</button>
-            <span className="text-xs text-gray-400 ml-2">Ingredient quantities will adjust automatically to reduce waste</span>
-          </div>
-          <button onClick={handleOrder} className="bg-green-600 text-white px-6 py-2 rounded font-semibold hover:bg-green-700 mb-6 w-full sm:w-auto" disabled={!checked.some(Boolean)}>Order Ingredients</button>
-          <div className="bg-gray-50 rounded-lg p-4 mb-4">
-            <h2 className="font-semibold mb-2">Ingredients</h2>
-            <div className="font-semibold text-green-700 mb-4 text-base sm:text-lg">Tick ingredients below to enable ordering.</div>
-            <ul className="space-y-1">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+      <div className="bg-white rounded-2xl shadow-2xl max-w-4xl w-full mx-2 overflow-hidden relative max-h-screen overflow-y-auto">
+        {/* Close button */}
+        <button onClick={() => window.history.back()} className="absolute top-4 right-4 text-gray-400 hover:text-gray-700 text-2xl font-bold">&times;</button>
+        {/* Image at the top */}
+        <img src={recipe.img} alt={recipe.title} className="w-full h-80 object-cover rounded-t-2xl" />
+        {/* Two-column layout below image */}
+        <div className="flex flex-col md:flex-row gap-8 p-8">
+          {/* Left column: details and ingredients */}
+          <div className="flex-1 min-w-0">
+            <h1 className="text-3xl font-extrabold mb-2">{recipe.title}</h1>
+            <p className="text-gray-600 mb-4 text-base">{recipe.desc}</p>
+            <div className="flex items-center gap-6 text-gray-500 text-sm mb-4">
+              <span className="flex items-center gap-1"><span className="material-icons text-base align-middle">schedule</span> {recipe.time}</span>
+              <span className="flex items-center gap-1"><span className="material-icons text-base align-middle">star</span> {recipe.difficulty}</span>
+            </div>
+            {/* Tags */}
+            <div className="flex gap-2 mb-6">
+              <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">Thai</span>
+              <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">Curry</span>
+              <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">Vegetarian</span>
+            </div>
+            {/* Ingredients */}
+            <h2 className="font-semibold mb-2 text-lg">Ingredients</h2>
+            <div className="divide-y divide-gray-200">
               {adjustedIngredients.map((ing, i) => (
-                <li key={i} className="flex items-center gap-2">
-                  <input
-                    type="checkbox"
-                    className="accent-green-600"
-                    checked={checked[i]}
-                    onChange={e => {
-                      const arr = [...checked];
-                      arr[i] = e.target.checked;
-                      setChecked(arr);
-                    }}
-                  />
-                  <span>{ing.qty} {ing.unit} {ing.name}</span>
-                </li>
+                <div key={i} className="flex items-center justify-between py-3">
+                  <div className="flex-1 font-medium text-gray-800">{ing.name}</div>
+                  <div className="w-32 text-gray-600 text-right">
+                    <div>{ing.qty} {ing.unit}</div>
+                    <div className="text-xs text-gray-400 mt-1">NPR {ing.adjustedPrice.toFixed(2)}</div>
+                  </div>
+                </div>
               ))}
-            </ul>
-            {orderWarning && <div className="text-red-500 text-sm mt-2">{orderWarning}</div>}
-            <div className="mt-4 text-xs text-gray-500">
-              <div>Nutrition Facts (per serving):</div>
-              <div>Calories {recipe.nutrition.calories} | Protein {recipe.nutrition.protein}g | Carbs {recipe.nutrition.carbs}g | Fat {recipe.nutrition.fat}g</div>
             </div>
+          </div>
+          {/* Right column: order card */}
+          <div className="bg-gray-50 rounded-xl shadow p-6 w-full md:w-80 flex flex-col gap-4 h-fit">
+            <h3 className="font-semibold mb-2 text-lg">Customize Your Order</h3>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-gray-600">Number of Servings</span>
+              <div className="flex items-center gap-2">
+                <button onClick={() => setServings(s => Math.max(1, s-1))} className="px-2 py-1 bg-gray-200 rounded">-</button>
+                <span className="px-3 font-semibold">{servings}</span>
+                <button onClick={() => setServings(s => s+1)} className="px-2 py-1 bg-gray-200 rounded">+</button>
+              </div>
+            </div>
+            <div className="flex items-center justify-between mb-2">
+              <span className="text-gray-600">Total Price:</span>
+              <span className="text-green-600 text-2xl font-bold">NPR {totalPrice}</span>
+            </div>
+            <div className="text-xs text-gray-500 mb-2">All ingredients pre-measured and ready to cook</div>
+            <button onClick={handleOrder} className="bg-green-600 text-white px-6 py-2 rounded font-semibold hover:bg-green-700 w-full">
+              <FaShoppingCart className="inline-block mr-2 mb-1" /> Add to Cart
+            </button>
           </div>
         </div>
       </div>
-      <div className="mt-10">
-        <h2 className="font-semibold mb-4 text-lg">Instructions</h2>
-        <ol className="list-decimal pl-6 space-y-3">
-          {recipe.instructions.map((step, i) => (
-            <li key={i} className="bg-green-50 rounded p-3 flex gap-3 items-start">
-              <span className="inline-block w-6 h-6 bg-green-600 text-white rounded-full text-center font-bold mr-2">{i+1}</span>
-              <span>{step}</span>
-            </li>
-          ))}
-        </ol>
-      </div>
-      {/* Login Modal */}
-      {showLoginModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-          <div className="bg-white rounded-lg shadow-lg p-8 max-w-sm w-full text-center">
-            <h2 className="text-xl font-bold mb-4 text-green-700">You need to sign up or log in first!</h2>
-            <p className="mb-6 text-gray-600">Please log in or create an account to order ingredients.</p>
-            <div className="flex gap-4 justify-center">
-              <button
-                className="bg-green-600 text-white px-4 py-2 rounded font-semibold hover:bg-green-700 transition"
-                onClick={() => navigate('/login')}
-              >
-                Go to Login
-              </button>
-              <button
-                className="bg-gray-200 text-gray-700 px-4 py-2 rounded font-semibold hover:bg-gray-300 transition"
-                onClick={() => setShowLoginModal(false)}
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </div>
   );
 };

@@ -259,8 +259,6 @@ const Recipes = () => {
           Next
         </button>
       </div>
-      {/* Add service hour at the bottom */}
-      <div className="text-center font-bold text-green-700 text-lg mt-12 mb-4">Service Hour 08:00 AM to 9:00 PM</div>
     </div>
   );
 };
