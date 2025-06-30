@@ -1,7 +1,8 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { FaUserCircle, FaShoppingCart } from "react-icons/fa";
 import logo from "../assets/Orange Modern Cargo Delivery Company Logo (1).png";
+import { CartContext } from "../context/CartContext";
 
 const getUser = () => {
   const stored = localStorage.getItem("prep_plate_user");
@@ -14,6 +15,7 @@ const Navbar = () => {
   const [dropdown, setDropdown] = useState(false);
   const navigate = useNavigate();
   const dropdownRef = useRef();
+  const { cart } = useContext(CartContext);
 
   useEffect(() => {
     const handleClick = (e) => {
@@ -56,6 +58,11 @@ const Navbar = () => {
       <div className="flex items-center gap-10 relative ml-auto z-10">
         <Link to="/cart" className="text-gray-700 hover:text-green-600 text-xl relative">
           <FaShoppingCart />
+          {cart.length > 0 && (
+            <span className="absolute -top-2 -right-2 bg-green-600 text-white text-xs rounded-full px-2 py-0.5 font-bold">
+              {cart.length}
+            </span>
+          )}
         </Link>
         <button
           className="text-gray-700 hover:text-green-600 text-xl relative"

@@ -401,6 +401,7 @@ const RecipeDetails = () => {
   const [servings, setServings] = useState(recipe.servings);
   const [checked, setChecked] = useState(Array(recipe.ingredients.length).fill(false));
   const [orderWarning, setOrderWarning] = useState("");
+  const [addedMsg, setAddedMsg] = useState("");
 
   const user = localStorage.getItem('prep_plate_user');
 
@@ -418,7 +419,8 @@ const RecipeDetails = () => {
       pricePerServing: (Number(totalPrice) / servings).toFixed(2)
     };
     addToCart(itemToAdd);
-    navigate('/cart');
+    setAddedMsg("Added to cart!");
+    setTimeout(() => setAddedMsg(""), 2000);
   };
 
   // Calculate adjusted price for each ingredient based on servings
@@ -486,6 +488,7 @@ const RecipeDetails = () => {
             <button onClick={handleOrder} className="bg-green-600 text-white px-6 py-2 rounded font-semibold hover:bg-green-700 w-full">
               <FaShoppingCart className="inline-block mr-2 mb-1" /> Add to Cart
             </button>
+            {addedMsg && <div className="text-green-600 font-semibold mt-2 text-center">{addedMsg}</div>}
           </div>
         </div>
       </div>

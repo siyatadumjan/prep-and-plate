@@ -52,7 +52,7 @@ const Cart = () => {
               onClick={() => navigate("/checkout")}
               disabled={cart.length === 0}
             >
-              BUY NOW
+              Proceed to Checkout
             </button>
             <div className="text-xs text-gray-400 mt-2">Delivery scheduled for tomorrow between 9am - 12pm</div>
           </div>
