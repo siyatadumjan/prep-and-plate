@@ -395,7 +395,7 @@ const recipeData = {
 const RecipeDetails = () => {
   const { id } = useParams();
   const navigate = useNavigate();
-  const { addToCart } = useContext(CartContext);
+  const { addItem } = useContext(CartContext);
   
   const recipe = recipeData[id] || recipeData[1]; // Fallback to recipe 1 if ID not found
   const [servings, setServings] = useState(recipe.servings);
@@ -411,14 +411,14 @@ const RecipeDetails = () => {
       return;
     }
     const itemToAdd = {
-      id: recipe.id,
+      recipeId: String(recipe.id), // Ensure recipeId is a string
       title: recipe.title,
       img: recipe.img,
       servings: servings,
       price: Number(totalPrice),
       pricePerServing: (Number(totalPrice) / servings).toFixed(2)
     };
-    addToCart(itemToAdd);
+    addItem(itemToAdd);
     setAddedMsg("Added to cart!");
     setTimeout(() => setAddedMsg(""), 2000);
   };

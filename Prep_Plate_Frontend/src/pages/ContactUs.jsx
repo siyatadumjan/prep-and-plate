@@ -56,80 +56,27 @@ const ContactUs = () => {
                 <FaMapMarkerAlt className="text-3xl text-green-500" />
                 <div>
                   <h3 className="font-semibold">Our Office</h3>
-                  <p className="text-gray-600">Pulchowk Road, Lalitpur 44700, Nepal</p>
+                  <a href="https://maps.google.com/?q=Pulchowk Road, Lalitpur 44700, Nepal" target="_blank" rel="noopener noreferrer" className="text-gray-600 underline">Pulchowk Road, Lalitpur 44700, Nepal</a>
                 </div>
               </div>
               <div className="flex items-center gap-4">
                 <FaPhone className="text-3xl text-green-500" />
                 <div>
                   <h3 className="font-semibold">Phone</h3>
-                  <p className="text-gray-600">+977-98-0000-0000</p>
+                  <a href="tel:+9779800000000" className="text-gray-600 underline">+977-98-0000-0000</a>
                 </div>
               </div>
               <div className="flex items-center gap-4">
                 <FaEnvelope className="text-3xl text-green-500" />
                 <div>
                   <h3 className="font-semibold">Email</h3>
-                  <p className="text-gray-600">support@prepandplate.com</p>
+                  <a href="mailto:support@prepandplate.com" className="text-gray-600 underline">support@prepandplate.com</a>
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Contact Form */}
-          <div className="bg-gray-50 p-8 rounded-lg shadow-md">
-            <h2 className="text-2xl font-semibold mb-6">Send Us a Message</h2>
-            {success && (
-              <div className="mb-4 p-3 rounded bg-green-100 text-green-700 text-center font-semibold">
-                Your message has been sent successfully!
-              </div>
-            )}
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <div>
-                <label htmlFor="name" className="block text-sm font-medium text-gray-700">Full Name</label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="email" className="block text-sm font-medium text-gray-700">Email Address</label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
-                  required
-                />
-              </div>
-              <div>
-                <label htmlFor="message" className="block text-sm font-medium text-gray-700">Message</label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows="4"
-                  value={formData.message}
-                  onChange={handleChange}
-                  className="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-green-500 focus:border-green-500"
-                  required
-                ></textarea>
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-green-500 text-white px-4 py-2 rounded-md font-semibold hover:bg-green-600 transition disabled:opacity-50"
-                disabled={loading}
-              >
-                {loading ? 'Sending...' : 'Send Message'}
-              </button>
-            </form>
-          </div>
+          {/* Contact Form removed, only contact info links remain */}
         </div>
       </div>
     </div>

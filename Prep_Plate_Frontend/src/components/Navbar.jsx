@@ -68,7 +68,15 @@ const Navbar = () => {
           className="text-gray-700 hover:text-green-600 text-xl relative"
           onClick={() => setDropdown((d) => !d)}
         >
-          <FaUserCircle />
+          {user && user.photo ? (
+            <img
+              src={`http://localhost:5000${user.photo}`}
+              alt="Profile"
+              className="w-8 h-8 rounded-full object-cover border-2 border-green-200"
+            />
+          ) : (
+            <FaUserCircle />
+          )}
         </button>
         {dropdown && (
           <div ref={dropdownRef} className="absolute right-0 top-12 bg-white shadow-lg rounded w-56 z-50 p-4">
@@ -85,8 +93,20 @@ const Navbar = () => {
               </div>
             ) : (
               <div className="flex flex-col gap-2">
-                <div className="mb-2">
-                  <div className="font-semibold">{user.email}</div>
+                <div className="mb-2 flex items-center gap-2">
+                  {user.photo ? (
+                    <img
+                      src={`http://localhost:5000${user.photo}`}
+                      alt="Profile"
+                      className="w-8 h-8 rounded-full object-cover border"
+                    />
+                  ) : (
+                    <FaUserCircle className="text-2xl text-gray-400" />
+                  )}
+                  <div>
+                    <div className="font-semibold">{user.fullName || user.email}</div>
+                    {user.fullName && <div className="text-sm text-gray-500">{user.email}</div>}
+                  </div>
                 </div>
                 <button
                   className="w-full text-left px-3 py-2 rounded hover:bg-green-50"

@@ -1,59 +1,52 @@
-import React, { createContext, useState, useEffect } from 'react';
+// src/context/CartContext.jsx
+import React, { createContext, useEffect, useState } from "react";
+import {
+  fetchCart,
+  addOrUpdateCartItem,
+  removeCartItem,
+} from "../server/API";
 
 export const CartContext = createContext();
 
 export const CartProvider = ({ children }) => {
-  const [cart, setCart] = useState(() => {
-    try {
-      const localCart = localStorage.getItem('prep_plate_cart');
-      return localCart ? JSON.parse(localCart) : [];
-    } catch (error) {
-      return [];
-    }
-  });
+  const [cart, setCart] = useState([]);
+  const userId = JSON.parse(localStorage.getItem("prep_plate_user"))?._id;
 
   useEffect(() => {
-    localStorage.setItem('prep_plate_cart', JSON.stringify(cart));
-  }, [cart]);
+    if (userId) {
+      fetchCart(userId).then(data => {
+        setCart(data.items || []);
+      });
+    }
+  }, [userId]);
 
-  const addToCart = (item) => {
-    setCart((prevCart) => {
-      // Check if item already exists
-      const existingItem = prevCart.find((cartItem) => cartItem.id === item.id);
-      if (existingItem) {
-        // Update servings if it exists
-        return prevCart.map((cartItem) =>
-          cartItem.id === item.id ? { ...cartItem, servings: cartItem.servings + item.servings, price: cartItem.price + item.price } : cartItem
-        );
-      } else {
-        // Add new item
-        return [...prevCart, item];
-      }
-    });
+  const updateServings = async (itemId, delta) => {
+    const updated = cart.map((item) =>
+      item.id === itemId
+        ? { ...item, servings: item.servings + delta, price: item.pricePerServing * (item.servings + delta) }
+        : item
+    );
+    const item = updated.find(i => i.id === itemId);
+    await addOrUpdateCartItem(userId, item);
+    setCart(updated);
   };
 
-  const updateServings = (id, delta) => {
-    setCart(cart => cart.map(item =>
-      item.id === id ? { 
-        ...item, 
-        servings: Math.max(1, item.servings + delta),
-        // This assumes price is per-serving. Adjust if needed.
-        price: (item.price / item.servings) * Math.max(1, item.servings + delta)
-      } : item
-    ));
+  const addItem = async (item) => {
+    console.log('CARTCONTEXT DEBUG userId:', userId); // Debug log
+    await addOrUpdateCartItem(userId, item);
+    // Fetch updated cart from backend
+    const data = await fetchCart(userId);
+    setCart(data.items || []);
   };
 
-  const removeItem = (id) => {
-    setCart(cart => cart.filter(item => item.id !== id));
+  const removeItem = async (itemId) => {
+    await removeCartItem(userId, itemId);
+    setCart(prev => prev.filter(item => item.id !== itemId));
   };
-  
-  const clearCart = () => {
-    setCart([]);
-  }
 
   return (
-    <CartContext.Provider value={{ cart, addToCart, updateServings, removeItem, clearCart }}>
+    <CartContext.Provider value={{ cart, updateServings, addItem, removeItem }}>
       {children}
     </CartContext.Provider>
   );
-}; 
+};

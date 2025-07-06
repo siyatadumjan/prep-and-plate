@@ -1,11 +1,36 @@
-import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import React, { useState, useEffect } from "react";
+import { Link, useLocation } from "react-router-dom";
+import { verifyEsewaPayment } from "../server/API";
 
 const OrderConfirmation = () => {
   const [rating, setRating] = useState(0);
   const [hover, setHover] = useState(0);
   const [review, setReview] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const [address, setAddress] = useState("");
+  const [paymentMethod, setPaymentMethod] = useState("");
+  const [esewaStatus, setEsewaStatus] = useState(null);
+  const location = useLocation();
+
+  useEffect(() => {
+    // Try to get last order info from localStorage (set in Cart.jsx after checkout)
+    const lastOrder = JSON.parse(localStorage.getItem("prep_plate_last_order"));
+    if (lastOrder) {
+      setAddress(lastOrder.address || "");
+      setPaymentMethod(lastOrder.paymentMethod || "");
+      localStorage.removeItem("prep_plate_last_order");
+    }
+    // eSewa verification if redirected from eSewa
+    const params = new URLSearchParams(location.search);
+    const amt = params.get("amt");
+    const rid = params.get("refId") || params.get("rid");
+    const pid = params.get("pid");
+    if (amt && rid && pid) {
+      verifyEsewaPayment(amt, rid, pid).then(res => {
+        setEsewaStatus(res.success ? "success" : "failure");
+      }).catch(() => setEsewaStatus("failure"));
+    }
+  }, [location.search]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +46,22 @@ const OrderConfirmation = () => {
           </svg>
         </div>
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-extrabold mb-2 text-center text-green-700">Order Confirmed!</h1>
-        <p className="text-base sm:text-lg text-gray-600 text-center mb-4 sm:mb-6">Thank you for your purchase. Your order has been placed successfully and will be delivered soon.</p>
+        <p className="text-base sm:text-lg text-gray-600 text-center mb-2 sm:mb-4">Thank you for your purchase. Your order has been placed successfully and will be delivered soon.</p>
+        {address && (
+          <div className="mb-2 text-center text-gray-700">
+            <div><span className="font-semibold">Delivery Address:</span> {address}</div>
+          </div>
+        )}
+        {paymentMethod && (
+          <div className="mb-4 text-center text-gray-700">
+            <div><span className="font-semibold">Payment Method:</span> {paymentMethod}</div>
+          </div>
+        )}
+        {paymentMethod === "eSewa" && esewaStatus && (
+          <div className={`mb-4 text-center font-semibold ${esewaStatus === "success" ? "text-green-600" : "text-red-600"}`}>
+            {esewaStatus === "success" ? "eSewa Payment Successful!" : "eSewa Payment Failed!"}
+          </div>
+        )}
         <Link to="/recipes" className="mt-2 px-4 py-2 sm:px-6 sm:py-3 bg-green-600 text-white rounded-lg font-semibold shadow hover:bg-green-700 transition w-full sm:w-auto text-center">Continue Shopping</Link>
         {/* Review Section */}
         <div className="mt-8 w-full">
