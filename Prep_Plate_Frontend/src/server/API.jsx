@@ -139,3 +139,9 @@ export const changePassword = async (userId, oldPassword, newPassword) => {
     throw err.response?.data || { message: 'Failed to change password' };
   }
 };
+
+// Featured Recipes
+export const fetchFeaturedRecipes = async () => {
+  const res = await axios.get(`${API_BASE_URL}/recipes/featured`);
+  return res.data;
+};

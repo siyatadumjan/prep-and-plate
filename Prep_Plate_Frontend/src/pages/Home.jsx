@@ -1,35 +1,28 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-
-const featuredRecipes = [
-  {
-    id: 1,
-    title: "Lemon Herb Roasted Chicken",
-    desc: "Perfectly roasted chicken with a bright lemon and herb flavor profile. Zero waste.",
-    img: "https://images.pexels.com/photos/5718025/pexels-photo-5718025.jpeg?auto=compress&cs=tinysrgb&w=400",
-    time: "1 hr 30 min",
-    servings: 4,
-  },
-  {
-    id: 2,
-    title: "Vegetarian Pasta Primavera",
-    desc: "Fresh spring vegetables tossed with pasta in a light sauce. Perfectly portioned.",
-    img: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=400",
-    time: "25 min",
-    servings: 2,
-  },
-  {
-    id: 3,
-    title: "Steamed Chicken Momo",
-    desc: "Delicious steamed dumplings filled with seasoned minced chicken.",
-    img: "https://images.pexels.com/photos/5409010/pexels-photo-5409010.jpeg?auto=compress&cs=tinysrgb&w=400",
-    time: "40 min",
-    servings: 8,
-  },
-];
+import { fetchFeaturedRecipes } from "../server/API";
 
 const Home = () => {
   const navigate = useNavigate();
+  const [featuredRecipes, setFeaturedRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState("");
+
+  useEffect(() => {
+    const getFeatured = async () => {
+      setLoading(true);
+      setError("");
+      try {
+        const data = await fetchFeaturedRecipes();
+        setFeaturedRecipes(data);
+      } catch (err) {
+        setError("Failed to load featured recipes.");
+      } finally {
+        setLoading(false);
+      }
+    };
+    getFeatured();
+  }, []);
 
   return (
     <div className="bg-green-50 min-h-screen">
@@ -81,19 +74,27 @@ const Home = () => {
           <h2 className="text-xl font-semibold">Featured Recipes</h2>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {featuredRecipes.map(recipe => (
-            <Link to={`/recipes/${recipe.id}`} key={recipe.id} className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden block">
-              <img src={recipe.img} alt={recipe.title} className="w-full h-48 object-cover" />
-              <div className="p-4">
-                <h3 className="font-semibold text-lg mb-1">{recipe.title}</h3>
-                <p className="text-gray-500 text-sm mb-2">{recipe.desc}</p>
-                <div className="flex items-center text-xs text-gray-400 gap-4">
-                  <span>⏱ {recipe.time}</span>
-                  <span>🍽 {recipe.servings} servings</span>
+          {loading ? (
+            <div className="col-span-3 text-center">Loading...</div>
+          ) : error ? (
+            <div className="col-span-3 text-center text-red-600">{error}</div>
+          ) : featuredRecipes.length === 0 ? (
+            <div className="col-span-3 text-center">No featured recipes found.</div>
+          ) : (
+            featuredRecipes.map(recipe => (
+              <Link to={`/recipes/${recipe._id}`} key={recipe._id} className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden block">
+                <img src={recipe.img} alt={recipe.title} className="w-full h-48 object-cover" />
+                <div className="p-4">
+                  <h3 className="font-semibold text-lg mb-1">{recipe.title}</h3>
+                  <p className="text-gray-500 text-sm mb-2">{recipe.desc}</p>
+                  <div className="flex items-center text-xs text-gray-400 gap-4">
+                    <span>⏱ {recipe.time}</span>
+                    <span>🍽 {recipe.servings} servings</span>
+                  </div>
                 </div>
-              </div>
-            </Link>
-          ))}
+              </Link>
+            ))
+          )}
         </div>
       </section>
     </div>
