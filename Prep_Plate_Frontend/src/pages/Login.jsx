@@ -67,9 +67,9 @@ const Login = () => {
         alt="Pizza background"
         className="absolute inset-0 w-full h-full object-cover opacity-60 blur-sm z-0"
       />
-      <div className="relative z-10 flex w-full max-w-3xl bg-white/90 rounded-2xl shadow-2xl overflow-hidden border border-green-100">
-        {/* Left side with image and logo */}
-        <div className="hidden md:flex flex-col items-center justify-center w-1/2 bg-gradient-to-br from-green-100 to-green-50 p-8">
+      <div className="relative z-10 flex w-full max-w-md bg-white/90 rounded-2xl shadow-2xl overflow-hidden border border-green-100">
+        {/* Left side with image and logo - removed for simplicity */}
+        {/* <div className="hidden md:flex flex-col items-center justify-center w-1/2 bg-gradient-to-br from-green-100 to-green-50 p-8">
           <img src={logo} alt="Prep & Plate Logo" className="h-16 mb-4" />
           <img
             src={pizzaImg}
@@ -77,10 +77,10 @@ const Login = () => {
             className="rounded-xl shadow-lg w-full object-cover"
             style={{ maxHeight: "220px" }}
           />
-        </div>
+        </div> */}
 
-        {/* Right side with form */}
-        <div className="flex-1 flex flex-col justify-center p-8">
+        {/* Right side with form - now takes full width */}
+        <div className="flex-1 flex flex-col justify-center p-8 w-full">
           <h1 className="text-2xl sm:text-3xl font-extrabold mb-2 text-green-700">
             Login to Prep & Plate
           </h1>

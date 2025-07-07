@@ -9,117 +9,6 @@ import beefTacosImg from "../assets/beef-tacos.webp";
 import chocolateLavaCakeImg from "../assets/chocolate-lava-cake.webp";
 import samosaImg from "../assets/samosa.avif";
 
-const allRecipes = [
-  {
-    id: 1,
-    title: "Lemon Herb Roasted Chicken",
-    desc: "Perfectly roasted chicken with a bright lemon and herb flavor profile. Zero waste.",
-    img: "https://images.pexels.com/photos/5718025/pexels-photo-5718025.jpeg?auto=compress&cs=tinysrgb&w=400",
-    time: "1 hr 30 min",
-    servings: 4,
-    tag: "Non Vegetarian",
-  },
-  {
-    id: 2,
-    title: "Vegetarian Pasta Primavera",
-    desc: "Fresh spring vegetables tossed with pasta in a light sauce. Perfectly portioned.",
-    img: "https://images.pexels.com/photos/1437267/pexels-photo-1437267.jpeg?auto=compress&cs=tinysrgb&w=400",
-    time: "25 min",
-    servings: 2,
-    tag: "Vegetarian",
-  },
-  {
-    id: 3,
-    title: "Steamed Chicken Momo",
-    desc: "Delicious steamed dumplings filled with seasoned minced chicken.",
-    img: "https://images.pexels.com/photos/5409010/pexels-photo-5409010.jpeg?auto=compress&cs=tinysrgb&w=400",
-    time: "40 min",
-    servings: 8,
-    tag: "Non Vegetarian",
-  },
-  {
-    id: 4,
-    title: "Selroti",
-    desc: "Traditional Nepali rice flour ring bread, crispy on the outside and soft inside. Often enjoyed during festivals and special occasions.",
-    img: selrotiImg,
-    time: "1 hr",
-    servings: 4,
-    tag: "Traditional",
-  },
-  {
-    id: 5,
-    title: "Beef Stir Fry",
-    desc: "Quick and easy beef stir fry with precise portions of vegetables and sauce.",
-    img: beefStirFryImg,
-    time: "30 min",
-    servings: 4,
-    tag: "Non Vegetarian",
-  },
-  {
-    id: 6,
-    title: "Palak Paneer",
-    desc: "Classic Indian dish made with paneer cubes simmered in a creamy spinach gravy.",
-    img: palakPaneerImg,
-    time: "15 min",
-    servings: 2,
-    tag: "Vegan",
-  },
-  {
-    id: 7,
-    title: "Spicy Tuna Rolls",
-    desc: "Classic sushi rolls with spicy tuna and avocado, perfectly portioned.",
-    img: "https://images.unsplash.com/photo-1579871494447-9811cf80d66c?auto=format&fit=crop&w=400&q=80",
-    time: "50 min",
-    servings: 2,
-    tag: "Popular",
-  },
-  {
-    id: 8,
-    title: "Classic Margherita Pizza",
-    desc: "Simple and delicious pizza with fresh mozzarella, tomatoes, and basil.",
-    img: classicMargheritaPizzaImg,
-    time: "30 min",
-    servings: 3,
-    tag: "Vegetarian",
-  },
-  {
-    id: 9,
-    title: "Beef Tacos",
-    desc: "Flavorful ground beef tacos with all the fixings.",
-    img: beefTacosImg,
-    time: "25 min",
-    servings: 4,
-    tag: "Non Vegetarian",
-  },
-   {
-    id: 10,
-    title: "Chocolate Lava Cakes",
-    desc: "Decadent individual chocolate cakes with a gooey, molten chocolate center.",
-    img: chocolateLavaCakeImg,
-    time: "22 min",
-    servings: 2,
-    tag: "Dessert",
-  },
-  {
-    id: 11,
-    title: "Panipuri",
-    desc: "A popular Indian street food consisting of crispy puris filled with spicy, tangy water, potatoes, and chickpeas.",
-    img: paniPuriImg,
-    time: "20 min",
-    servings: 2,
-    tag: "",
-  },
-  {
-    id: 12,
-    title: "Samosa",
-    desc: "A popular Indian snack with a crispy pastry filled with spicy potatoes and peas.",
-    img: samosaImg,
-    time: "1 hr",
-    servings: 4,
-    tag: "Vegan",
-  }
-];
-
 const cuisineOptions = [
   { label: 'Vegetarian', value: 'Vegetarian' },
   { label: 'Non Vegetarian', value: 'Non Vegetarian' },
@@ -132,30 +21,42 @@ const cuisineOptions = [
 const Recipes = () => {
   const navigate = useNavigate();
   const location = useLocation();
-
-  // Read page from query param, default to 1
   const params = new URLSearchParams(location.search);
   const initialPage = parseInt(params.get("page")) || 1;
 
   const [search, setSearch] = useState("");
   const [page, setPage] = useState(initialPage);
   const recipesPerPage = 6;
-
   const [showFilters, setShowFilters] = useState(false);
   const [selectedTags, setSelectedTags] = useState([]);
+  const [recipes, setRecipes] = useState([]);
 
-  // Update URL when page changes
-  React.useEffect(() => {
-    const params = new URLSearchParams(location.search);
-    if (page !== initialPage) {
-      params.set("page", page);
-      navigate({ search: params.toString() }, { replace: true });
-    }
+  // Fetch all recipes on load
+  useEffect(() => {
+    fetchRecipes("");
     // eslint-disable-next-line
-  }, [page]);
+  }, []);
 
-  const filtered = allRecipes.filter(r =>
-    r.title.toLowerCase().includes(search.toLowerCase()) &&
+  // Fetch recipes from backend
+  const fetchRecipes = async (query) => {
+    let url = "http://localhost:5000/api/recipes";
+    if (query) {
+      url = `http://localhost:5000/api/recipes/search?query=${encodeURIComponent(query)}`;
+    }
+    const res = await fetch(url);
+    const data = await res.json();
+    setRecipes(data);
+  };
+
+  // Handle search input
+  const handleSearch = (e) => {
+    const value = e.target.value;
+    setSearch(value);
+    fetchRecipes(value);
+  };
+
+  // Filter by tag (client-side)
+  const filtered = recipes.filter(r =>
     (selectedTags.length === 0 || (r.tag && selectedTags.includes(r.tag)))
   );
   const paginated = filtered.slice((page-1)*recipesPerPage, page*recipesPerPage);
@@ -176,7 +77,7 @@ const Recipes = () => {
             type="text"
             placeholder="Search recipes..."
             value={search}
-            onChange={e => setSearch(e.target.value)}
+            onChange={handleSearch}
             className="border rounded px-3 py-1 text-sm focus:outline-none focus:ring-2 focus:ring-green-200"
           />
         </div>
@@ -232,6 +133,9 @@ const Recipes = () => {
             </div>
           </Link>
         ))}
+        {paginated.length === 0 && (
+          <div className="col-span-full text-center text-gray-500">No recipes found.</div>
+        )}
       </div>
       {/* Pagination */}
       <div className="flex justify-center items-center gap-2">

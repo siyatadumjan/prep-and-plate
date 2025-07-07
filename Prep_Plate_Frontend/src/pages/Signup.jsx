@@ -71,11 +71,12 @@ const Signup = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 relative overflow-hidden">
       <img src={pizzaImg} alt="Pizza background" className="absolute inset-0 w-full h-full object-cover opacity-60 blur-sm z-0" />
       <div className="relative z-10 flex w-full max-w-3xl bg-white/90 rounded-2xl shadow-2xl overflow-hidden border border-green-100">
-        <div className="hidden md:flex flex-col items-center justify-center w-1/2 bg-gradient-to-br from-green-100 to-green-50 p-8">
+        {/* Left side with image and logo - removed for simplicity */}
+        {/* <div className="hidden md:flex flex-col items-center justify-center w-1/2 bg-gradient-to-br from-green-100 to-green-50 p-8">
           <img src={logo} alt="Prep & Plate Logo" className="h-16 mb-4" />
           <img src={pizzaImg} alt="Pizza" className="rounded-xl shadow-lg w-full object-cover" style={{ maxHeight: '220px' }} />
-        </div>
-        <div className="flex-1 flex flex-col justify-center p-8">
+        </div> */}
+        <div className="flex-1 flex flex-col justify-center p-8 w-full">
           <h1 className="text-2xl sm:text-3xl font-extrabold mb-2 text-green-700">Create your account</h1>
           <div className="text-gray-500 text-sm mb-6">Already have an account? <Link to="/login" className="text-green-600 font-semibold hover:underline">Sign in</Link></div>
           {message && <div className="mb-4 text-green-600 text-center font-medium bg-green-50 border border-green-200 rounded py-2">{message}</div>}
