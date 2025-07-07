@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/Orange Modern Cargo Delivery Company Logo (1).png";
 import pizzaImg from "../assets/classic margherita pizza.jpeg";
+import loginBg from "../assets/login background.avif";
 import { registerUser } from "../server/API";
 import { getUserProfile } from "../server/API"; // Added import for getUserProfile
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const Signup = () => {
   const [fullName, setFullName] = useState("");
@@ -69,8 +71,8 @@ const Signup = () => {
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gray-100 relative overflow-hidden">
-      <img src={pizzaImg} alt="Pizza background" className="absolute inset-0 w-full h-full object-cover opacity-60 blur-sm z-0" />
-      <div className="relative z-10 flex w-full max-w-3xl bg-white/90 rounded-2xl shadow-2xl overflow-hidden border border-green-100">
+      <img src={loginBg} alt="Signup background" className="absolute inset-0 w-full h-full object-cover opacity-60 blur-sm z-0" />
+      <div className="relative z-10 flex w-full max-w-md bg-white/90 rounded-2xl shadow-2xl overflow-hidden border border-green-100">
         {/* Left side with image and logo - removed for simplicity */}
         {/* <div className="hidden md:flex flex-col items-center justify-center w-1/2 bg-gradient-to-br from-green-100 to-green-50 p-8">
           <img src={logo} alt="Prep & Plate Logo" className="h-16 mb-4" />
@@ -78,7 +80,6 @@ const Signup = () => {
         </div> */}
         <div className="flex-1 flex flex-col justify-center p-8 w-full">
           <h1 className="text-2xl sm:text-3xl font-extrabold mb-2 text-green-700">Create your account</h1>
-          <div className="text-gray-500 text-sm mb-6">Already have an account? <Link to="/login" className="text-green-600 font-semibold hover:underline">Sign in</Link></div>
           {message && <div className="mb-4 text-green-600 text-center font-medium bg-green-50 border border-green-200 rounded py-2">{message}</div>}
           {error && <div className="mb-4 text-red-600 text-center font-medium bg-red-50 border border-red-200 rounded py-2">{error}</div>}
           <form className="space-y-4" onSubmit={handleSubmit}>
@@ -128,11 +129,11 @@ const Signup = () => {
                 />
                 <button
                   type="button"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-green-600"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                   onClick={() => setShowPassword(prev => !prev)}
                   tabIndex={-1}
                 >
-                  {showPassword ? "🙈" : "👁️"}
+                  {showPassword ? <FiEye /> : <FiEyeOff />}
                 </button>
               </div>
               {passwordError && <div className="text-red-500 text-xs mt-1 ml-1">{passwordError}</div>}
@@ -145,6 +146,7 @@ const Signup = () => {
               {loading ? "Creating..." : "Create account"}
             </button>
           </form>
+          <div className="text-center text-sm text-gray-500 mt-4">Already have an account? <Link to="/login" className="text-green-600 font-semibold hover:underline">Sign in</Link></div>
         </div>
       </div>
     </div>

@@ -2,8 +2,10 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../assets/Orange Modern Cargo Delivery Company Logo (1).png";
 import pizzaImg from "../assets/classic margherita pizza.jpeg";
+import loginBg from "../assets/login background.avif";
 import { loginUser } from "../server/API";
 import { getUserProfile } from "../server/API"; // Added import for getUserProfile
+import { FiEye, FiEyeOff } from "react-icons/fi";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -63,8 +65,8 @@ const Login = () => {
     <div className="min-h-screen flex items-center justify-center bg-gray-100 relative overflow-hidden">
       {/* Blurred background image */}
       <img
-        src={pizzaImg}
-        alt="Pizza background"
+        src={loginBg}
+        alt="Login background"
         className="absolute inset-0 w-full h-full object-cover opacity-60 blur-sm z-0"
       />
       <div className="relative z-10 flex w-full max-w-md bg-white/90 rounded-2xl shadow-2xl overflow-hidden border border-green-100">
@@ -126,11 +128,11 @@ const Login = () => {
                 />
                 <button
                   type="button"
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-gray-400 hover:text-green-600"
+                  className="absolute right-3 top-1/2 transform -translate-y-1/2 text-gray-500"
                   onClick={() => setShowPassword((s) => !s)}
                   tabIndex={-1}
                 >
-                  {showPassword ? "🙈" : "👁️"}
+                  {showPassword ? <FiEye /> : <FiEyeOff />}
                 </button>
               </div>
               <div className="flex justify-end mt-1">

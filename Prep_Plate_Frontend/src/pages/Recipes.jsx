@@ -33,16 +33,23 @@ const Recipes = () => {
 
   // Fetch all recipes on load
   useEffect(() => {
-    fetchRecipes("");
+    fetchRecipes(search, selectedTags);
     // eslint-disable-next-line
   }, []);
 
+  // Fetch recipes when search or filters change
+  useEffect(() => {
+    fetchRecipes(search, selectedTags);
+    // eslint-disable-next-line
+  }, [search, selectedTags]);
+
   // Fetch recipes from backend
-  const fetchRecipes = async (query) => {
+  const fetchRecipes = async (query = "", tags = []) => {
     let url = "http://localhost:5000/api/recipes";
-    if (query) {
-      url = `http://localhost:5000/api/recipes/search?query=${encodeURIComponent(query)}`;
-    }
+    const params = [];
+    if (query) params.push(`query=${encodeURIComponent(query)}`);
+    if (tags.length > 0) params.push(`tags=${tags.map(encodeURIComponent).join(",")}`);
+    if (params.length > 0) url += "/search?" + params.join("&");
     const res = await fetch(url);
     const data = await res.json();
     setRecipes(data);
@@ -52,7 +59,15 @@ const Recipes = () => {
   const handleSearch = (e) => {
     const value = e.target.value;
     setSearch(value);
-    fetchRecipes(value);
+  };
+
+  // Handle filter change
+  const handleTagChange = (value, checked) => {
+    if (checked) {
+      setSelectedTags(tags => [...tags, value]);
+    } else {
+      setSelectedTags(tags => tags.filter(t => t !== value));
+    }
   };
 
   // Filter by tag (client-side)
@@ -67,12 +82,7 @@ const Recipes = () => {
       <div className="flex items-center justify-between mb-8">
         <h1 className="text-3xl font-bold">Recipes</h1>
         <div className="flex gap-2 items-center">
-          <button
-            className="border rounded px-3 py-1 text-sm font-semibold bg-gray-50 hover:bg-green-100 transition"
-            onClick={() => setShowFilters(f => !f)}
-          >
-            &#9776; Filters
-          </button>
+        
           <input
             type="text"
             placeholder="Search recipes..."
@@ -83,42 +93,10 @@ const Recipes = () => {
         </div>
       </div>
       {/* Filter Sidebar */}
-      {showFilters && (
-        <div className="mb-8 max-w-md w-full bg-white rounded-lg shadow p-6 border border-green-100">
-          <div className="font-semibold mb-4 text-lg">Filters</div>
-          <div className="mb-4">
-            <div className="font-medium mb-2 text-gray-700">Cuisine/Type</div>
-            <div className="grid grid-cols-2 gap-2">
-              {cuisineOptions.map(opt => (
-                <label key={opt.value} className="flex items-center gap-2 cursor-pointer">
-                  <input
-                    type="checkbox"
-                    checked={selectedTags.includes(opt.value)}
-                    onChange={e => {
-                      if (e.target.checked) {
-                        setSelectedTags(tags => [...tags, opt.value]);
-                      } else {
-                        setSelectedTags(tags => tags.filter(t => t !== opt.value));
-                      }
-                    }}
-                    className="accent-green-600"
-                  />
-                  <span>{opt.label}</span>
-                </label>
-              ))}
-            </div>
-          </div>
-          <button
-            className="mt-4 bg-green-600 text-white px-4 py-2 rounded font-semibold hover:bg-green-700 transition"
-            onClick={() => setShowFilters(false)}
-          >
-            Done
-          </button>
-        </div>
-      )}
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 mb-8 min-h-[600px]">
+      
+      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5 mb-4 min-h-[400px]">
         {paginated.map(recipe => (
-          <Link to={`/recipes/${recipe.id}`} key={recipe.id} className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col h-full">
+          <Link to={`/recipes/${recipe._id}`} key={recipe._id} className="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col h-full">
             <img src={recipe.img} alt={recipe.title} className="w-full h-56 sm:h-64 md:h-72 object-cover" />
             <div className="p-4 flex flex-col flex-1">
               <div className="flex justify-between items-center mb-1">

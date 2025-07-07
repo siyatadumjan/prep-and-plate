@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
-import { Link, useLocation } from "react-router-dom";
-import { verifyEsewaPayment } from "../server/API";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import axios from "axios";
 
 const OrderConfirmation = () => {
   const [rating, setRating] = useState(0);
@@ -11,6 +11,7 @@ const OrderConfirmation = () => {
   const [paymentMethod, setPaymentMethod] = useState("");
   const [esewaStatus, setEsewaStatus] = useState(null);
   const location = useLocation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     // Try to get last order info from localStorage (set in Cart.jsx after checkout)
@@ -22,13 +23,23 @@ const OrderConfirmation = () => {
     }
     // eSewa verification if redirected from eSewa
     const params = new URLSearchParams(location.search);
-    const amt = params.get("amt");
-    const rid = params.get("refId") || params.get("rid");
-    const pid = params.get("pid");
-    if (amt && rid && pid) {
-      verifyEsewaPayment(amt, rid, pid).then(res => {
-        setEsewaStatus(res.success ? "success" : "failure");
-      }).catch(() => setEsewaStatus("failure"));
+    const token = params.get("data");
+    if (token) {
+      // Use browser base64 decode for JWT-like token
+      let decoded = {};
+      try {
+        decoded = JSON.parse(atob(token.split('.')[1]));
+      } catch (e) {
+        setEsewaStatus("failure");
+        return;
+      }
+      axios.post("http://localhost:5000/api/orders/esewa/verify", {
+        product_id: decoded.transaction_uuid,
+      })
+      .then(res => {
+        setEsewaStatus(res.data && res.data.data && res.data.data.status === "COMPLETE" ? "success" : "failure");
+      })
+      .catch(() => setEsewaStatus("failure"));
     }
   }, [location.search]);
 
@@ -57,7 +68,7 @@ const OrderConfirmation = () => {
             <div><span className="font-semibold">Payment Method:</span> {paymentMethod}</div>
           </div>
         )}
-        {paymentMethod === "eSewa" && esewaStatus && (
+        {esewaStatus && (
           <div className={`mb-4 text-center font-semibold ${esewaStatus === "success" ? "text-green-600" : "text-red-600"}`}>
             {esewaStatus === "success" ? "eSewa Payment Successful!" : "eSewa Payment Failed!"}
           </div>

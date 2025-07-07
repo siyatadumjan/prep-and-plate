@@ -16,6 +16,8 @@ const Cart = () => {
   const navigate = useNavigate();
   const userId = JSON.parse(localStorage.getItem("prep_plate_user"))?._id;
   const [cart, setCart] = useState([]);
+
+
   const [orderMsg, setOrderMsg] = useState("");
   const [address, setAddress] = useState("");
   const [paymentMethod, setPaymentMethod] = useState("Cash on Delivery");
@@ -53,35 +55,49 @@ const Cart = () => {
 
   const handleCheckout = async () => {
     if (paymentMethod === "eSewa") {
-      // Initiate eSewa payment
       try {
-        const productId = `ORDER_${Date.now()}`;
         const successUrl = "http://localhost:5173/orderconfirmed";
         const failureUrl = "http://localhost:5173/payment-failure";
-        const { formData, esewaUrl } = await initiateEsewaPayment(total, productId, successUrl, failureUrl);
-        // Render a form and auto-submit to eSewa
+  
+        // First place the order and get orderId
+        const placedOrder = await checkout(userId, cart, total, address, paymentMethod);
+        const productId = placedOrder._id; // Use MongoDB ObjectId for eSewa
+  
+        // Then initiate eSewa payment with orderId
+        const { formData, esewaUrl, error } = await initiateEsewaPayment(total, productId, successUrl, failureUrl);
+  
+        if (error || !formData || !esewaUrl) {
+          throw new Error(error || "eSewa form data missing");
+        }
+  
         setEsewaForm({ formData, esewaUrl });
-        // Store address/payment for confirmation page
         localStorage.setItem("prep_plate_last_order", JSON.stringify({ address, paymentMethod }));
+  
       } catch (err) {
+        console.error(err);
         setOrderMsg("Failed to initiate eSewa payment.");
       }
       return;
     }
-    // Normal checkout
-    try {
-      await checkout(userId, cart, total, address, paymentMethod);
-      setCart([]);
-      setOrderMsg("Order placed successfully! Thank you for your purchase.");
-      localStorage.setItem("prep_plate_last_order", JSON.stringify({ address, paymentMethod }));
-      setTimeout(() => {
-        setOrderMsg("");
-        navigate("/order-confirmation");
-      }, 1500);
-    } catch (err) {
-      setOrderMsg("Failed to place order. Please try again.");
+  
+    // Normal checkout flow for other payment methods here...
+    if (paymentMethod === "Cash on Delivery") {
+      try {
+        const placedOrder = await checkout(userId, cart, total, address, paymentMethod);
+        localStorage.setItem("prep_plate_last_order", JSON.stringify({ address, paymentMethod }));
+        setOrderMsg("Order placed successfully! Cash on Delivery selected.");
+        setTimeout(() => {
+          navigate("/orderconfirmed");
+        }, 1000);
+      } catch (err) {
+        console.error(err);
+        setOrderMsg("Failed to place order. Please try again.");
+      }
+      return;
     }
   };
+  
+
 
   useEffect(() => {
     if (esewaForm) {
@@ -94,14 +110,15 @@ const Cart = () => {
   return (
     <div className="max-w-5xl mx-auto px-4 py-10">
       {/* eSewa payment form (auto-submit) */}
-      {esewaForm && (
-        <form action={esewaForm.esewaUrl} method="POST" style={{ display: "none" }} id="esewaForm">
-          {Object.entries(esewaForm.formData).map(([key, value]) => (
-            <input key={key} type="hidden" name={key} value={value} />
-          ))}
-          <button type="submit">Pay with eSewa</button>
-        </form>
-      )}
+      {esewaForm?.formData && (
+  <form action={esewaForm.esewaUrl} method="POST" style={{ display: "none" }} id="esewaForm">
+    {Object.entries(esewaForm.formData).map(([key, value]) => (
+      <input key={key} type="hidden" name={key} value={value} />
+    ))}
+    <button type="submit">Pay with eSewa</button>
+  </form>
+)}
+
       <h1 className="text-3xl font-bold mb-8">Your Cart</h1>
       <div className="flex flex-col md:flex-row gap-8">
         <div className="flex-1 min-w-0">

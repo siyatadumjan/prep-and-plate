@@ -1,6 +1,7 @@
 import React, { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { CartContext } from "../context/CartContext";
+import axios from "axios";
 
 const Checkout = () => {
   const [payment, setPayment] = useState("Esewa");
@@ -8,17 +9,51 @@ const Checkout = () => {
   const [address, setAddress] = useState("");
   const [phone, setPhone] = useState("");
   const [phoneError, setPhoneError] = useState("");
-  const { clearCart } = useContext(CartContext);
+  const { cart, clearCart } = useContext(CartContext);
   const navigate = useNavigate();
+  const userId = JSON.parse(localStorage.getItem("prep_plate_user"))?._id;
 
-  const handlePayment = () => {
-    setLoading(true);
-    // Simulate payment processing
-    setTimeout(() => {
-      setLoading(false);
-      clearCart();
-      navigate("/order-confirmation");
-    }, 1500);
+  // Calculate total price from cart
+  const total = cart.reduce((sum, item) => sum + (item.price || 0), 0);
+
+  const handleEsewaPayment = async () => {
+    try {
+      // 1. Create the order in the backend (let MongoDB generate the _id)
+      const orderRes = await axios.post("http://localhost:5000/api/orders", {
+        userId,
+        items: cart,
+        total,
+        address,
+        paymentMethod: "eSewa",
+      });
+      const orderId = orderRes.data._id; // This is a valid ObjectId
+      // 2. Initiate eSewa payment with the order _id as productId
+      const response = await axios.post("http://localhost:5000/api/orders/esewa/initiate", {
+        amount: total,
+        productId: orderId,
+      });
+      if (response.data.url) {
+        window.location.href = response.data.url;
+      } else {
+        alert("Failed to initiate eSewa payment.");
+      }
+    } catch (error) {
+      alert("Error initiating eSewa payment.");
+    }
+  };
+
+  const handlePayment = async (e) => {
+    e.preventDefault();
+    if (payment === "Esewa") {
+      await handleEsewaPayment();
+    } else {
+      setLoading(true);
+      setTimeout(() => {
+        setLoading(false);
+        clearCart();
+        navigate("/order-confirmation");
+      }, 1500);
+    }
   };
 
   return (
@@ -40,7 +75,6 @@ const Checkout = () => {
             <span>Cash on Delivery</span>
           </label>
         </div>
-        
         <div className="border-t pt-4">
             <h3 className="font-semibold mb-2">Address</h3>
             <input
@@ -61,7 +95,6 @@ const Checkout = () => {
                 onChange={e => {
                   const value = e.target.value.replace(/[^0-9]/g, '');
                   setPhone(value);
-                  // Validate Nepali phone number: 10 digits, starts with 98, 97, or 96
                   if (!/^9[876]\d{8}$/.test(value)) {
                     setPhoneError("Enter a valid 10-digit Nepali mobile number (starts with 98, 97, or 96)");
                   } else {
@@ -74,7 +107,6 @@ const Checkout = () => {
             </div>
             {phoneError && <div className="text-red-500 text-sm mt-1">{phoneError}</div>}
         </div>
-
         <button 
             onClick={handlePayment}
             disabled={loading || !address.trim() || !phone.trim() || !!phoneError}
