@@ -34,6 +34,17 @@ router.get('/search', async (req, res) => {
   }
 });
 
+// Get featured recipes
+router.get('/featured', async (req, res) => {
+  try {
+    const recipes = await Recipe.find({ featured: true });
+    res.json(recipes);
+  } catch (err) {
+    console.error('Featured recipes error:', err);
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 // Get recipe by id
 router.get('/:id', async (req, res) => {
   const recipe = await Recipe.findById(req.params.id);

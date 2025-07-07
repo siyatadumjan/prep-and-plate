@@ -12,6 +12,7 @@ const sampleRecipes = [
     servings: 2,
     tag: "Non Vegetarian",
     difficulty: "Medium",
+    featured: true,
     ingredients: [
       { name: "Beef sirloin", qty: 200, unit: "g", price: 200 },
       { name: "Bell pepper", qty: 1, unit: "piece", price: 30 },
@@ -30,6 +31,7 @@ const sampleRecipes = [
     servings: 3,
     tag: "Non Vegetarian",
     difficulty: "Easy",
+    featured: true,
     ingredients: [
       { name: "Ground beef", qty: 250, unit: "g", price: 150 },
       { name: "Taco shells", qty: 6, unit: "pieces", price: 60 },
@@ -48,6 +50,7 @@ const sampleRecipes = [
     servings: 2,
     tag: "Dessert",
     difficulty: "Medium",
+    featured: true,
     ingredients: [
       { name: "Dark chocolate", qty: 100, unit: "g", price: 50 },
       { name: "Butter", qty: 50, unit: "g", price: 20 },

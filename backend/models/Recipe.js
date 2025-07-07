@@ -24,6 +24,7 @@ const RecipeSchema = new Schema({
   difficulty: String,
   ingredients: [IngredientSchema],
   nutrition: NutritionSchema,
+  featured: { type: Boolean, default: false },
 });
 
 module.exports = mongoose.model('Recipe', RecipeSchema);
