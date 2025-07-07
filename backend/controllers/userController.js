@@ -62,3 +62,55 @@ exports.uploadPhoto = async (req, res) => {
     res.status(err.status || 500).json({ message: err.message || 'Server error' });
   }
 }; 
+
+exports.forgotPassword = async (req, res) => {
+  try {
+    const { email } = req.body;
+    if (!email) {
+      return res.status(400).json({ message: 'Email is required' });
+    }
+    await userService.forgotPassword(email);
+    res.json({ message: 'If that email is registered, an OTP has been sent.' });
+  } catch (err) {
+    res.status(err.status || 500).json({ message: err.message || 'Server error' });
+  }
+};
+
+exports.verifyOTP = async (req, res) => {
+  try {
+    const { email, otp } = req.body;
+    if (!email || !otp) {
+      return res.status(400).json({ message: 'Email and OTP are required' });
+    }
+    await userService.verifyOTP(email, otp);
+    res.json({ message: 'OTP verified. You may now reset your password.' });
+  } catch (err) {
+    res.status(err.status || 500).json({ message: err.message || 'Server error' });
+  }
+};
+
+exports.resetPassword = async (req, res) => {
+  try {
+    const { email, otp, password } = req.body;
+    if (!email || !otp || !password) {
+      return res.status(400).json({ message: 'Email, OTP, and new password are required' });
+    }
+    await userService.resetPasswordWithOTP(email, otp, password);
+    res.json({ message: 'Password has been reset successfully.' });
+  } catch (err) {
+    res.status(err.status || 500).json({ message: err.message || 'Server error' });
+  }
+}; 
+
+exports.changePassword = async (req, res) => {
+  try {
+    const { userId, oldPassword, newPassword } = req.body;
+    if (!userId || !oldPassword || !newPassword) {
+      return res.status(400).json({ message: 'User ID, old password, and new password are required' });
+    }
+    await userService.changePassword(userId, oldPassword, newPassword);
+    res.json({ message: 'Password changed successfully.' });
+  } catch (err) {
+    res.status(err.status || 500).json({ message: err.message || 'Server error' });
+  }
+}; 

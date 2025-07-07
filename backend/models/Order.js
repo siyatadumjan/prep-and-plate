@@ -10,11 +10,13 @@ const OrderItemSchema = new mongoose.Schema({
 });
 
 const OrderSchema = new mongoose.Schema({
+  orderId: { type: String, unique: true }, // ✅ Required for eSewa
   user: { type: mongoose.Schema.Types.ObjectId, ref: 'User', required: true },
   items: [OrderItemSchema],
   total: Number,
-  address: String, // New field
-  paymentMethod: String, // New field
+  address: String,
+  paymentMethod: String,
+  status: { type: String, default: 'pending' }, // ✅ Status tracking
   createdAt: { type: Date, default: Date.now },
 });
 

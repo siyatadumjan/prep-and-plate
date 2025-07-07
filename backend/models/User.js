@@ -34,6 +34,22 @@ const userSchema = new Schema({
   createdAt: {
     type: Date,
     default: Date.now
+  },
+  passwordResetToken: {
+    type: String,
+    default: null
+  },
+  passwordResetExpires: {
+    type: Date,
+    default: null
+  },
+  passwordResetOTP: {
+    type: String,
+    default: null
+  },
+  passwordResetOTPExpires: {
+    type: Date,
+    default: null
   }
 }, { timestamps: true });
 

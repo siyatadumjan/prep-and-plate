@@ -12,6 +12,13 @@ router.post('/signup', authController.register);
 // @access  Public
 router.post('/login', authController.login);
 
+// Forgot password (send OTP)
+router.post('/forgot-password', authController.forgotPassword);
+// Verify OTP
+router.post('/verify-otp', authController.verifyOTP);
+// Reset password with OTP
+router.post('/reset-password', authController.resetPassword);
+
 // @route   GET /api/auth/profile
 // @desc    Get user profile
 // @access  Public

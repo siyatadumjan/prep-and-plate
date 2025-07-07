@@ -8,6 +8,32 @@ router.get('/', async (req, res) => {
   res.json(recipes);
 });
 
+// Search recipes by title or description and filter by tags
+router.get('/search', async (req, res) => {
+  try {
+    const query = req.query.query || '';
+    const tags = req.query.tags ? req.query.tags.split(',') : [];
+    const regex = new RegExp(query, 'i'); // case-insensitive
+    const filter = {
+      $and: [
+        {
+          $or: [
+            { title: regex },
+            { description: regex }
+          ]
+        }
+      ]
+    };
+    if (tags.length > 0) {
+      filter.$and.push({ tag: { $in: tags } });
+    }
+    const recipes = await Recipe.find(filter);
+    res.json(recipes);
+  } catch (err) {
+    res.status(500).json({ message: 'Server error' });
+  }
+});
+
 // Get recipe by id
 router.get('/:id', async (req, res) => {
   const recipe = await Recipe.findById(req.params.id);

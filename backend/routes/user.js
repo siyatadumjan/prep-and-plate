@@ -22,4 +22,7 @@ router.post('/login', userController.login);
 // Profile photo upload
 router.post('/upload-photo', fakeAuth, upload.single('photo'), userController.uploadPhoto);
 
+// Change password
+router.post('/change-password', userController.changePassword);
+
 module.exports = router;

@@ -1,6 +1,8 @@
 const User = require('../models/User');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const crypto = require('crypto');
+const nodemailer = require('nodemailer');
 
 // Register function
 exports.register = async (fullName, email, phoneNumber, password) => {
@@ -88,4 +90,80 @@ exports.updatePhoto = async (userId, photoUrl) => {
   } catch (err) {
     throw err;
   }
+};
+
+// Forgot Password (send OTP)
+exports.forgotPassword = async (email) => {
+  email = email.toLowerCase();
+  const user = await User.findOne({ email });
+  if (!user) {
+    // Do not reveal if user exists
+    return;
+  }
+  // Generate 6-digit OTP
+  const otp = Math.floor(100000 + Math.random() * 900000).toString();
+  user.passwordResetOTP = otp;
+  user.passwordResetOTPExpires = Date.now() + 10 * 60 * 1000; // 10 minutes
+  await user.save();
+
+  // Set up nodemailer (use your SMTP config)
+  const transporter = nodemailer.createTransport({
+    service: 'gmail',
+    auth: {
+      user: process.env.EMAIL_USER,
+      pass: process.env.EMAIL_PASS
+    }
+  });
+
+  const mailOptions = {
+    to: user.email,
+    from: process.env.EMAIL_USER,
+    subject: 'Your OTP for Password Reset',
+    text: `Your OTP for password reset is: ${otp}. It is valid for 10 minutes.`
+  };
+  await transporter.sendMail(mailOptions);
+};
+
+// Verify OTP
+exports.verifyOTP = async (email, otp) => {
+  email = email.toLowerCase();
+  const user = await User.findOne({ email });
+  if (!user || !user.passwordResetOTP || !user.passwordResetOTPExpires) {
+    throw { status: 400, message: 'Invalid or expired OTP' };
+  }
+  if (user.passwordResetOTP !== otp || user.passwordResetOTPExpires < Date.now()) {
+    throw { status: 400, message: 'Invalid or expired OTP' };
+  }
+  // OTP is valid
+  return true;
+};
+
+// Reset Password with OTP
+exports.resetPasswordWithOTP = async (email, otp, newPassword) => {
+  email = email.toLowerCase();
+  const user = await User.findOne({ email });
+  if (!user || !user.passwordResetOTP || !user.passwordResetOTPExpires) {
+    throw { status: 400, message: 'Invalid or expired OTP' };
+  }
+  if (user.passwordResetOTP !== otp || user.passwordResetOTPExpires < Date.now()) {
+    throw { status: 400, message: 'Invalid or expired OTP' };
+  }
+  user.password = newPassword;
+  user.passwordResetOTP = null;
+  user.passwordResetOTPExpires = null;
+  await user.save();
+};
+
+// Change Password
+exports.changePassword = async (userId, oldPassword, newPassword) => {
+  const user = await User.findById(userId);
+  if (!user) {
+    throw { status: 404, message: 'User not found' };
+  }
+  const isMatch = await bcrypt.compare(oldPassword, user.password);
+  if (!isMatch) {
+    throw { status: 400, message: 'Old password is incorrect' };
+  }
+  user.password = newPassword;
+  await user.save();
 };
