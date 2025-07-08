@@ -20,6 +20,7 @@ import AboutUs from "./pages/AboutUs";
 import ContactUs from "./pages/ContactUs";
 import Help from "./pages/Help";
 import ForgotPassword from "./pages/ForgotPassword";
+import OrderConfirmed from "./pages/OrderConfirmed";
 
 function App() {
   return (
@@ -41,6 +42,7 @@ function App() {
               <Route path="/account/orders" element={<OrderHistory />} />
               <Route path="/account/deliveries" element={<Deliveries />} />
               <Route path="/account/payment-methods" element={<PaymentMethods />} />
+              <Route path="/orderconfirmed" element={<OrderConfirmed/>} />
               <Route path="/account/address" element={<Address />} />
               <Route path="/about" element={<AboutUs />} />
               <Route path="/contact" element={<ContactUs />} />

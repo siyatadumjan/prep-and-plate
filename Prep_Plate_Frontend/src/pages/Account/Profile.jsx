@@ -267,7 +267,7 @@ const Profile = () => {
                       <div className="text-sm text-gray-500">{new Date(order.createdAt).toLocaleString()}</div>
                     </div>
                     <div className="mb-2">
-                      <span className="font-medium">Status:</span> <span className="text-green-700">{order.status}</span>
+                      <span className="font-medium">Status:</span> <span className="text-green-700">Successful</span>
                     </div>
                     <div className="mb-2">
                       <span className="font-medium">Payment:</span> {order.paymentMethod}
